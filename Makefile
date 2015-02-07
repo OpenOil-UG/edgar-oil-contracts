@@ -45,3 +45,28 @@ make_listing:
 	mkdir tasks
 	python generate_input.py | split -l 10 - tasks/listing
 	aws s3 sync ./tasks/ $(BUCKET)/tasks/
+
+index_files:
+	python edgar_indices.py
+	aws s3 sync ./company_listings $(BUCKET)/company_listings
+
+filter_filings:
+	python filter_filings.py
+	aws s3 sync ./company_listings_filtered $(BUCKET)/company_listings_filtered
+
+sic_companies:
+	python companis_by_sic.py \
+		--conf-path $(CONF_FILE) \
+		--no-output \
+		--runner local \
+		--cleanup NONE \
+		-v \
+		--emr-job-flow-id j-HRW9YVFAQ91Y\
+		--output-dir=$(BUCKET)/moresics4 < sics.txt
+
+minerals_reports:
+	# zless company_listings/master_2014_* | grep "|SD|" > sd_filings.txt
+	aws s3 sync ./sdfilings $(BUCKET)/minerals_reports
+
+dl_filings_test:
+	head -20 filings_by_company.txt | python dl_filings.py

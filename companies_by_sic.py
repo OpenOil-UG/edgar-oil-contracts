@@ -1,7 +1,7 @@
 import requests
 from lxml import html
 from mrjob.job import MRJob
-from mrjob.protocol import JSONValueProtocol
+from mrjob.protocol import JSONValueProtocol, RawValueProtocol
 
 def by_sic_corpwatch(sic):
     # does not work
@@ -27,7 +27,7 @@ class SICCorps(MRJob):
     output: tab-delimited cik, name, company, sic for companies with that SIC
     '''
 
-    OUTPUT_PROTOCOL = JSONValueProtocol
+    OUTPUT_PROTOCOL = RawValueProtocol
 
     def mapper(self, _, sic):
         url = 'http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&SIC=%s&owner=include&match=&start=0&count=4999&hidefilings=0' % sic
@@ -38,12 +38,8 @@ class SICCorps(MRJob):
         for row in rows[1:]: # ditch the headers
             cik, name, state = [x.text_content() for x in row.findall('.//td')]
             cik = cik.lstrip('0') # official CIKs have leading zeroes, but they are painful for us
-            yield None, {
-                'cik': cik,
-                'name': name,
-                'state': state,
-                'sic': sic}
-
+            #yield None, {'cik': cik,'name': name,'state': state,'sic': sic}
+            yield None, "\t".join([cik, name, state, sic])
 
 if __name__ == '__main__':
     SICCorps.run()
