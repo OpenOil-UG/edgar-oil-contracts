@@ -67,6 +67,9 @@ sic_companies:
 minerals_reports:
 	# zless company_listings/master_2014_* | grep "|SD|" > sd_filings.txt
 	aws s3 sync ./sdfilings $(BUCKET)/minerals_reports
-
 dl_filings_test:
 	head -20 filings_by_company.txt | python dl_filings.py
+
+dl_filings:
+	cat filings_by_company.txt | python dl_filings.py
+

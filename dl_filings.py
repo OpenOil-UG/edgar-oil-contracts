@@ -22,7 +22,7 @@ config = {
     }
 
 
-OUTPUT_DIR = 'filings'
+OUTPUT_DIR = '/data/edgar_filings'
 
 def get_paths(line):
     (cik, name,filetype,date,url) = line.split('|')
