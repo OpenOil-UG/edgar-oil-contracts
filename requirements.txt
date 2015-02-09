@@ -1,3 +1,5 @@
 scrapekit
 lxml
 requests
+nltk
+cssselect

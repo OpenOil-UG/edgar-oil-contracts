@@ -9,7 +9,7 @@ from nltk.util import ngrams
 import nltk
 
 REMOVE_SPACES = re.compile(r'\s+')
-POS_DIR = 'data/positive'
+POS_DIR = 'data_mining/positive'
 NEG_DIR = 'data/negative'
 
 
@@ -59,7 +59,7 @@ def run():
     fs = [(gt, len(fns)) for gt, fns in features.items()]
     fs = sorted(fs, key=lambda (gt, fn): fn, reverse=True)
     for gt, fn in fs:
-        if fn > 3:
+        if fn > 1:
             print "%s,%s" % (gt, fn)
 
 
