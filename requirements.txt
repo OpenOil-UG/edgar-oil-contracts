@@ -3,3 +3,5 @@ lxml
 requests
 nltk
 cssselect
+mrjob
+scikit-learn
