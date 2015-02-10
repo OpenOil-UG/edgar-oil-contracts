@@ -5,6 +5,7 @@ Given a listing like this:
 download it to:
 OUTPUT_DIR/1015647/6-K_2014-05-14_0001102624-14-000792.txt
 '''
+import argparse
 import ftplib
 import sys
 import os
@@ -87,4 +88,8 @@ def dl_queue(fh):
     workqueue.join()
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--outdir", default=OUTDIR, help="where to store the files dowloaded from edgar")
+    args = parser.parse_args()
+    OUTDIR=args.OUTDIR
     dl_queue(sys.stdin)

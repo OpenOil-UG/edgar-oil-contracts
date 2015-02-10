@@ -59,7 +59,7 @@ def run():
     fs = [(gt, len(fns)) for gt, fns in features.items()]
     fs = sorted(fs, key=lambda (gt, fn): fn, reverse=True)
     for gt, fn in fs:
-        if fn > 1:
+        if fn > 2:
             print "%s,%s" % (gt, fn)
 
 
