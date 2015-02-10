@@ -2,8 +2,10 @@
 BUCKET=s3://sec-mining.openoil.net
 CONF_FILE=mrjob.conf
 
-FILING_DOWNLOAD_DIR=/data/filings
-EXTRACTED_TEXT_DIR=/data/filings_text
+FILING_DOWNLOAD_DIR=/data/edgar_filings
+EXTRACTED_TEXT_DIR=/data/edgar_filings_text
+WATERSHED_FILE=watershed_list.txt
+SCORE_FILE=computed_scores.txt
 
 _make_listing:
 	python generate_input.py
@@ -76,9 +78,12 @@ sic_companies:
 minerals_reports:
 	# zless company_listings/master_2014_* | grep "|SD|" > sd_filings.txt
 	aws s3 sync ./sdfilings $(BUCKET)/minerals_reports
-dl_filings_test:
-	head -20 filings_by_company.txt | python dl_filings.py
 
 dl_filings:
-	cat filings_by_company.txt | python dl_filings.py
+	cat filings_by_company.txt | python dl_filings.py --outdir $(FILING_DOWNLOAD_DIR)
 
+watershed_list:
+	python training/watershed.py > $(WATERSHED_FILE)
+
+score_by_filename:
+	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python score_filings.py | tee $(SCORE_FILE)

@@ -1,9 +1,11 @@
+import codecs
 import re, math, string
 from urlparse import urljoin
 from unicodedata import normalize as ucnorm, category
 from collections import defaultdict
 
 from mrjob.job import MRJob, JSONProtocol
+from mrjob.protocol import JSONValueProtocol
 
 DOCS = re.compile(r'^<DOCUMENT>$(.*)^</DOCUMENT>$', re.I | re.M | re.S)
 SIC_EXTRACT = re.compile(r'<ASSIGNED-SIC> *(.*)', re.I)
@@ -19,14 +21,18 @@ URL = 'http://www.sec.gov/Archives/edgar/data/%s/%s/%s-index.htm'
 STOPWORDS = set(open('stopwords.txt').read().lower().split())
 SCORES = {}
 
-for line in open('searches.txt').readlines():
-    term, score = line.rsplit(' ', 1)
-    term = term.lower().strip()
-    if term.startswith('#'):
-        continue
-    SCORES[term] = re.compile(term), float(score)
+def makesearchregex(fn='searches.txt'):
+    for line in open(fn).readlines():
+        term, score = line.rsplit(',', 1)
+        term = term.lower().strip()
+        if term.startswith('#'):
+            continue
+        SCORES[term] = re.compile(term), float(score)
 
-SEARCHES = re.compile(' (%s) ' % '|'.join(SCORES.keys()))
+    searches = re.compile(' (%s) ' % '|'.join(SCORES.keys()))
+    return searches
+
+SEARCHES = makesearchregex('watershed_list.txt')
 
 
 def normalize_text(text):
@@ -102,7 +108,25 @@ def compute_score(doc):
     return score, tokens, len(pos_terms), dict(terms)
 
 
-# http://www.sec.gov/Archives/edgar/data/1402281/000135448810000906/0001354488-10-000906-index.htm
+class MRScoreFiles(MRJob):
+    """
+    input a list of filepaths
+    output a list of filepaths which score above the threshold
+    """
+    THRESHOLD=10
+    OUTPUT_PROTOCOL = JSONValueProtocol
+
+    def mapper(self, _, filepath):
+        filetext = codecs.open(filepath, 'r', 'utf-8').read()
+        score, tokens, numpositive, dictpositive = compute_score(filetext)
+        if score > self.THRESHOLD:
+            output = {
+                'score': score,
+                'filepath': filepath,
+                'positives': dictpositive
+                }
+            yield None, output
+
 class MRScoreFilings(MRJob):
 
     INPUT_PROTOCOL = JSONProtocol
@@ -153,4 +177,5 @@ class MRScoreFilings(MRJob):
 
 
 if __name__ == '__main__':
-    MRScoreFilings.run()
+    #MRScoreFilings.run()
+    MRScoreFiles.run()
