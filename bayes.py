@@ -1,7 +1,7 @@
 '''
 Bayesian classification to find contracts in edgar
 '''
-
+import langid
 import argparse
 import codecs
 import os
@@ -52,13 +52,18 @@ def build_classifier():
     return (clf, count)
 
 def classify(text, classifier, vectorizer):
-    THRESHOLD=0.4
+    THRESHOLD=0.2
     x_test  = vectorizer.transform([text]).todense()
     prob_neg, prob_pos = classifier.predict_proba(x_test)[0]
     if (prob_pos - prob_neg) > THRESHOLD:
         return 'positive'
     else:
         return 'negative'
+
+def is_english(text, threshold=0.5):
+    ranks = dict(langid.rank(text))
+    return ranks.get('en', 0) >= threshold
+        
 
 def classify_dir(directory, cl=None, vect=None):
     if cl is None:
@@ -70,6 +75,8 @@ def classify_dir(directory, cl=None, vect=None):
                 text = fh.read()
                 text = text.decode('utf-8')
                 normed = watershed.normalize_text(text)
+                if not is_english(text):
+                    continue
                 result = classify(normed, cl, vect)                
                 if result == 'positive':
                     print(fn)       
