@@ -53,7 +53,10 @@ def run(pos_dir, neg_dir, threshold):
 
     for fn, gt in read_texts(neg_dir):
         if gt in features:
-            del features[gt]
+            try:
+                features[gt].pop() # remove 
+            except KeyError:
+                del features[gt]
 
     fs = [(gt, len(fns)) for gt, fns in features.items()]
     fs = sorted(fs, key=lambda (gt, fn): fn, reverse=True)
