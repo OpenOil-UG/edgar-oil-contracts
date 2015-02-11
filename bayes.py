@@ -68,6 +68,7 @@ def is_english(text, threshold=0.5):
 def classify_dir(directory, cl=None, vect=None):
     if cl is None:
         (cl, vect) = build_classifier()
+    print('INFO:classifier built')
     for (dirpath, dirnames, filenames) in os.walk(directory):
         for filename in filenames:
             fn = os.path.join(dirpath, filename)
@@ -76,7 +77,9 @@ def classify_dir(directory, cl=None, vect=None):
                 text = text.decode('utf-8')
                 normed = watershed.normalize_text(text)
                 if not is_english(text):
+                    print('INFO: skipping junk file %i' % fn)
                     continue
+                print('INFO: classifying %i' % fn)
                 result = classify(normed, cl, vect)                
                 if result == 'positive':
                     print(fn)       
