@@ -87,7 +87,7 @@ watershed_list_mining_basic:
 	python training/watershed.py --pos_dir training/data_mining/positive --neg_dir training/data/negative> $(WATERSHED_FILE)
 
 watershed_list_mining_licenses:
-	python training/watershed.py --pos_dir training/licenses/positive --neg_dir training/data/negative > $(WATERSHED_FILE_LICENSES)
+	python -mpdb training/watershed.py --threshold 3 --pos_dir training/licenses/positive --neg_dir training/data/negative > $(WATERSHED_FILE_LICENSES)
 
 score_by_filename:
 	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python score_filings.py | tee $(SCORE_FILE)

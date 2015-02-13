@@ -8,6 +8,9 @@ import os
 
 from nltk.util import ngrams
 import nltk
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
 
 REMOVE_SPACES = re.compile(r'\s+')
 
@@ -35,7 +38,9 @@ def listdir_recursive(path):
 def read_texts(directory):
     for fn in listdir_recursive(directory):
         with open(fn, 'r') as fh:
+            logging.debug('reading %s' % fn)
             text = fh.read()
+	   
             try:
                 text = text.decode('utf-8')
                 norm = normalize_text(text)
@@ -65,12 +70,12 @@ def run(pos_dirs, neg_dirs, threshold):
     fs = sorted(fs, key=lambda (gt, fn): fn, reverse=True)
     for gt, fn in fs:
         if fn > threshold:
-            print "%s,%s" % (gt, fn)
+            print u"%s,%s" % (gt, fn)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--pos_dir", default=['training/data_mining/positive'], help="Directory containing text files like the ones we want to find", action='append')
-    parser.add_argument("--neg_dir", default=['training/data/negative'], help="Directory containing text files NOT like the ones we want to find", action='append')
+    parser.add_argument("--pos_dir", default=[], help="Directory containing text files like the ones we want to find", action='append')
+    parser.add_argument("--neg_dir", default=[], help="Directory containing text files NOT like the ones we want to find", action='append')
     parser.add_argument("--threshold", default=2, type=int, help="exclude ngrams which occur less this often in the training data")
     parser.add_argument("--ngram_max", default=6, type=int, help="include ngrams up to this many words long")
     ARGS = parser.parse_args()
