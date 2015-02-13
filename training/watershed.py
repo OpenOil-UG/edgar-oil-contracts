@@ -38,7 +38,7 @@ def read_texts(directory):
             try:
                 text = text.decode('utf-8')
                 norm = normalize_text(text)
-                for n in [1, 2, 3, 4, 5, 6]:
+                for n in range(1, ARGS.ngram_max+1):
                     for grams in ngrams(norm.split(), n):
                         gt = ' '.join(grams)
                         yield fn, gt
@@ -46,17 +46,19 @@ def read_texts(directory):
                 print "FAIL", fn
 
 
-def run(pos_dir, neg_dir, threshold):
+def run(pos_dirs, neg_dirs, threshold):
     features = defaultdict(set)
-    for fn, gt in read_texts(pos_dir):
-        features[gt].add(fn)
-
-    for fn, gt in read_texts(neg_dir):
-        if gt in features:
-            try:
-                features[gt].pop() # remove 
-            except KeyError:
-                del features[gt]
+    for pos_dir in pos_dirs:
+        for fn, gt in read_texts(pos_dir):
+            features[gt].add(fn)
+    
+    for neg_dir in neg_dirs:
+        for fn, gt in read_texts(neg_dir):
+            if gt in features:
+                try:
+                    features[gt].pop() # remove 
+                except KeyError:
+                    del features[gt]
 
     fs = [(gt, len(fns)) for gt, fns in features.items()]
     fs = sorted(fs, key=lambda (gt, fn): fn, reverse=True)
@@ -66,8 +68,9 @@ def run(pos_dir, neg_dir, threshold):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--pos_dir", default='training/data_mining/positive', help="Directory containing text files like the ones we want to find")
-    parser.add_argument("--neg_dir", default='training/data/negative', help="Directory containing text files NOT like the ones we want to find")
+    parser.add_argument("--pos_dir", default=['training/data_mining/positive'], help="Directory containing text files like the ones we want to find", action='append')
+    parser.add_argument("--neg_dir", default=['training/data/negative'], help="Directory containing text files NOT like the ones we want to find", action='append')
     parser.add_argument("--threshold", default=2, type=int, help="exclude ngrams which occur less this often in the training data")
-    args = parser.parse_args()
-    run(pos_dir=args.pos_dir, neg_dir=args.neg_dir, threshold=args.threshold)
+    parser.add_argument("--ngram_max", default=6, type=int, help="include ngrams up to this many words long")
+    ARGS = parser.parse_args()
+    run(pos_dirs=ARGS.pos_dir, neg_dirs=ARGS.neg_dir, threshold=ARGS.threshold)
