@@ -18,7 +18,7 @@ REMOVE_SPACES = re.compile(r'\s+')
 
 URL = 'http://www.sec.gov/Archives/edgar/data/%s/%s/%s-index.htm'
 
-STOPWORDS = set(open('stopwords.txt').read().lower().split())
+
 SCORES = {}
 
 def makesearchregex(fn='searches.txt'):
@@ -32,7 +32,6 @@ def makesearchregex(fn='searches.txt'):
     searches = re.compile(' (%s) ' % '|'.join(SCORES.keys()))
     return searches
 
-SEARCHES = makesearchregex('watershed_list.txt')
 
 
 def normalize_text(text):
@@ -177,5 +176,12 @@ class MRScoreFilings(MRJob):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--stopwords", default="stopwords.txt", help="file containing stopwords")
+    parser.add_argument("--watershed", default="watershed_list.txt", help="file containing watershed file")
+    ARGS = parser.parse_args()
+
+    STOPWORDS = set(open(ARGS.stopwords).read().lower().split())
+    SEARCHES = makesearchregex(ARGS.watershed)
     #MRScoreFilings.run()
     MRScoreFiles.run()
