@@ -5,6 +5,7 @@ CONF_FILE=mrjob.conf
 FILING_DOWNLOAD_DIR=/data/edgar_filings
 EXTRACTED_TEXT_DIR=/data/edgar_filings_text
 WATERSHED_FILE=watershed_list.txt
+WATERSHED_FILE_LICENSES=watershed_list_licenses.txt
 SCORE_FILE=computed_scores.txt
 
 _make_listing:
@@ -82,8 +83,11 @@ minerals_reports:
 dl_filings:
 	cat filings_by_company.txt | python dl_filings.py --outdir $(FILING_DOWNLOAD_DIR)
 
-watershed_list:
-	python training/watershed.py > $(WATERSHED_FILE)
+watershed_list_mining_basic:
+	python training/watershed.py --pos_dir training/data_mining/positive --neg_dir training/data/negative> $(WATERSHED_FILE)
+
+watershed_list_mining_licenses:
+	python training/watershed.py --pos_dir training/licenses/positive --neg_dir training/data/negative > $(WATERSHED_FILE_LICENSES)
 
 score_by_filename:
 	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python score_filings.py | tee $(SCORE_FILE)

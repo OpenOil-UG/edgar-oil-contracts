@@ -5,3 +5,4 @@ nltk
 cssselect
 mrjob
 scikit-learn
+gspread
