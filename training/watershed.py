@@ -29,10 +29,11 @@ def normalize_text(text):
     text = REMOVE_SPACES.sub(' ', text)
     return text.strip().lower()
 
+def listdir_recursive(path):
+    return (os.path.join(dp, f) for dp, dn, fn in os.walk(path) for f in fn)
 
 def read_texts(directory):
-    for fn in os.listdir(directory):
-        fn = os.path.join(directory, fn)
+    for fn in listdir_recursive(directory):
         with open(fn, 'r') as fh:
             text = fh.read()
             try:
@@ -56,7 +57,7 @@ def run(pos_dirs, neg_dirs, threshold):
         for fn, gt in read_texts(neg_dir):
             if gt in features:
                 try:
-                    features[gt].pop() # remove 
+                    features[gt].pop()
                 except KeyError:
                     del features[gt]
 
