@@ -1,3 +1,4 @@
+import argparse
 import codecs
 import re, math, string
 from urlparse import urljoin
@@ -176,10 +177,13 @@ class MRScoreFilings(MRJob):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--stopwords", default="stopwords.txt", help="file containing stopwords")
-    parser.add_argument("--watershed", default="watershed_list.txt", help="file containing watershed file")
-    ARGS = parser.parse_args()
+    #parser = argparse.ArgumentParser()
+    #parser.add_argument("--stopwords", default="stopwords.txt", help="file containing stopwords")
+    #parser.add_argument("--watershed", default="watershed_list.txt", help="file containing watershed file")
+    #ARGS = parser.parse_args()
+    class ARGS:
+        stopwords = 'stopwords.txt'
+        watershed = 'watershed_list_licenses.txt.2'
 
     STOPWORDS = set(open(ARGS.stopwords).read().lower().split())
     SEARCHES = makesearchregex(ARGS.watershed)

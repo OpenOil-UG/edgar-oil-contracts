@@ -7,6 +7,8 @@ EXTRACTED_TEXT_DIR=/data/edgar_filings_text
 WATERSHED_FILE=watershed_list.txt
 WATERSHED_FILE_LICENSES=watershed_list_licenses.txt
 SCORE_FILE=computed_scores.txt
+SCORE_FILE_LICENSES=computed_scores_licenses.txt
+RESULT_CSV_FILE=license_matches.txt
 
 _make_listing:
 	python generate_input.py
@@ -87,7 +89,13 @@ watershed_list_mining_basic:
 	python training/watershed.py --pos_dir training/data_mining/positive --neg_dir training/data/negative> $(WATERSHED_FILE)
 
 watershed_list_mining_licenses:
-	python -mpdb training/watershed.py --threshold 3 --pos_dir training/licenses/positive --neg_dir training/data/negative > $(WATERSHED_FILE_LICENSES)
+	python training/watershed.py --threshold 3 --pos_dir training/licenses/positive --neg_dir training/data/negative > $(WATERSHED_FILE_LICENSES)
 
 score_by_filename:
 	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python score_filings.py | tee $(SCORE_FILE)
+
+score_licenses:
+	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python score_filings.py | tee $(SCORE_FILE_LICENSES)
+
+reduce_results:
+	less $(SCORE_FILE) | jq --raw-output '"\(.score),\(.filepath)"' | sort -rn | head -n 1000 |cut -d, -f 2 | python edgar_link.py > $(RESULT_CSV_FILE)

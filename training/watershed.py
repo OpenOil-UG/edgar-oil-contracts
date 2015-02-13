@@ -4,6 +4,7 @@ import random
 from pprint import pprint
 from unicodedata import normalize as ucnorm, category
 from collections import defaultdict
+import codecs
 import os
 
 from nltk.util import ngrams
@@ -37,12 +38,12 @@ def listdir_recursive(path):
 
 def read_texts(directory):
     for fn in listdir_recursive(directory):
-        with open(fn, 'r') as fh:
+        with codecs.open(fn, 'r', 'utf-8', errors='ignore') as fh:
             logging.debug('reading %s' % fn)
             text = fh.read()
 	   
             try:
-                text = text.decode('utf-8')
+                # text = text.decode('utf-8')
                 norm = normalize_text(text)
                 for n in range(1, ARGS.ngram_max+1):
                     for grams in ngrams(norm.split(), n):
@@ -70,7 +71,10 @@ def run(pos_dirs, neg_dirs, threshold):
     fs = sorted(fs, key=lambda (gt, fn): fn, reverse=True)
     for gt, fn in fs:
         if fn > threshold:
-            print u"%s,%s" % (gt, fn)
+            try:
+                print u"%s,%s" % (gt, fn)
+            except Exception:
+                import pdb; pdb.set_trace()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

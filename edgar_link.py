@@ -12,7 +12,9 @@ def goback(_fn):
     filenum = re.search('_([\d\-]+).txt_extracted_', fn).group(1)
     filenum_short = ''.join(filenum.split('-'))
     url = 'http://www.sec.gov/Archives/edgar/data/%s/%s/%s-index.htm' % (cik, filenum_short, filenum)
-    return _fn.strip(), url, exhibit_num
+    human_exhibit_num = str(int(exhibit_num) + 1) # don't make users count from 0
+    return _fn.strip(), url, human_exhibit_num
+
 
 
 if __name__ == '__main__':
