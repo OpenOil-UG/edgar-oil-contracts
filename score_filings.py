@@ -5,6 +5,8 @@ from urlparse import urljoin
 from unicodedata import normalize as ucnorm, category
 from collections import defaultdict
 
+from util.pdftext import pdf2text
+
 from mrjob.job import MRJob, JSONProtocol
 from mrjob.protocol import JSONValueProtocol
 
@@ -116,16 +118,23 @@ class MRScoreFiles(MRJob):
     THRESHOLD=10
     OUTPUT_PROTOCOL = JSONValueProtocol
 
+    def text_from_file(self, filepath):
+        return codecs.open(filepath, 'r', 'utf-8').read()
+
     def mapper(self, _, filepath):
-        filetext = codecs.open(filepath, 'r', 'utf-8').read()
+        filetext = self.text_from_file(filepath)
         score, tokens, numpositive, dictpositive = compute_score(filetext)
-        if score > self.THRESHOLD:
+        if True or score > self.THRESHOLD:
             output = {
                 'score': score,
                 'filepath': filepath,
                 'positives': dictpositive
                 }
             yield None, output
+
+class MRScorePDFs(MRScoreFiles):
+    def text_from_file(self, filepath):
+        return pdf2text(filepath)
 
 class MRScoreFilings(MRJob):
 
@@ -173,7 +182,7 @@ class MRScoreFilings(MRJob):
                 max_score = data.get('score', 0)
                 file_data = data
         if file_data is not None:
-            yield url, file_data
+             yield url, file_data
 
 
 if __name__ == '__main__':
@@ -183,9 +192,10 @@ if __name__ == '__main__':
     #ARGS = parser.parse_args()
     class ARGS:
         stopwords = 'stopwords.txt'
-        watershed = 'watershed_list_licenses.txt.2'
+        watershed = 'watershed_list_licenses.txt'
 
     STOPWORDS = set(open(ARGS.stopwords).read().lower().split())
     SEARCHES = makesearchregex(ARGS.watershed)
     #MRScoreFilings.run()
-    MRScoreFiles.run()
+    #MRScoreFiles.run()
+    MRScorePDFs.run()
