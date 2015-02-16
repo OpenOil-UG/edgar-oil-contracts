@@ -12,6 +12,11 @@ RESULT_CSV_FILE=data/license_matches.txt
 COMPANY_LIST=data/companies_by_sic.txt
 SIC_LIST=data/sics.txt
 
+SEDAR_SCORE_FILE=/tmp/scored_sedar.json
+SEDAR_RESULT_FILE=/tmp/sedar_results.csv
+SEDAR_DL_DIR=/data/sedar/mining_material_documents_2014
+
+
 #####
 #
 #  LEGACY CODE SECTION
@@ -126,6 +131,13 @@ score_by_filename:
 
 score_licenses:
 	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python score_filings.py | tee $(SCORE_FILE_LICENSES)
+
+score_pdfs:
+	find $(SEDAR_DL_DIR) -type f | python score_filings.py | tee $(SEDAR_SCORE_FILE)
+
+reduce_sedar:
+	less $(SEDAR_SCORE_FILE) | jq --raw-output '"\(.score),\(.filepath),\(.positives)"' | sort -rn | sed -e 's/\/data\/sedar/https:\/\/sedar.openoil.net.s3.amazonaws.com/' -e "s/{/\'{/" -e "s/}/}\'/" > $(SEDAR_RESULT_FILE)
+
 
 reduce_results:
 	less $(SCORE_FILE) | jq --raw-output '"\(.score),\(.filepath)"' | sort -rn | head -n 1000 |cut -d, -f 2 | python edgar_link.py > $(RESULT_CSV_FILE)
