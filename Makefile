@@ -136,7 +136,7 @@ score_pdfs:
 	find $(SEDAR_DL_DIR) -type f | python score_filings.py | tee $(SEDAR_SCORE_FILE)
 
 reduce_sedar:
-	less $(SEDAR_SCORE_FILE) | jq --raw-output '"\(.score),\(.filepath),\(.positives),{\(.country_names)}"' | sort -rn | sed -e 's/\/data\/sedar/https:\/\/sedar.openoil.net.s3.amazonaws.com/' -e "s/{/\'{/g" -e "s/}/}\'/g" > $(SEDAR_RESULT_FILE)
+	less $(SEDAR_SCORE_FILE) | jq --raw-output '"\(.score),\(.filepath),¬\(.positives)¬,¬\(.country_names)¬,¬\(.extract)¬"' | sort -rn | sed -e 's/\/data\/sedar/https:\/\/sedar.openoil.net.s3.amazonaws.com/' -e "s/¬/\'/g" > $(SEDAR_RESULT_FILE)
 
 
 reduce_results:

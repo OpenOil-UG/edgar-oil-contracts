@@ -123,6 +123,9 @@ class MRScoreFiles(MRJob):
         text = normalize_text(text) # XXX avoid this repetition
         return {'country_names': countries_from_text(text)}
 
+    def snippet(self, filetext):
+        return {'extract' : normalize_text(filetext)[:200]}
+
     def text_from_file(self, filepath):
         return codecs.open(filepath, 'r', 'utf-8').read()
 
@@ -135,8 +138,8 @@ class MRScoreFiles(MRJob):
                 'filepath': filepath,
                 'positives': dictpositive
                 }
-
             output.update(self.country_names(filetext))
+            output.update(self.snippet(filetext))
             yield None, output
 
 class MRScorePDFs(MRScoreFiles):
