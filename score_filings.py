@@ -6,6 +6,7 @@ from unicodedata import normalize as ucnorm, category
 from collections import defaultdict
 
 from util.pdftext import pdf2text
+from util.findcountries import countries_from_text
 
 from mrjob.job import MRJob, JSONProtocol
 from mrjob.protocol import JSONValueProtocol
@@ -118,6 +119,10 @@ class MRScoreFiles(MRJob):
     THRESHOLD=10
     OUTPUT_PROTOCOL = JSONValueProtocol
 
+    def country_names(self, text):
+        text = normalize_text(text) # XXX avoid this repetition
+        return {'country_names': countries_from_text(text)}
+
     def text_from_file(self, filepath):
         return codecs.open(filepath, 'r', 'utf-8').read()
 
@@ -130,6 +135,8 @@ class MRScoreFiles(MRJob):
                 'filepath': filepath,
                 'positives': dictpositive
                 }
+
+            output.update(self.country_names(filetext))
             yield None, output
 
 class MRScorePDFs(MRScoreFiles):
