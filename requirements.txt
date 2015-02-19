@@ -6,3 +6,5 @@ cssselect
 mrjob
 scikit-learn
 gspread
+google-api-python-client
+functools32
