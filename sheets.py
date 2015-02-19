@@ -79,7 +79,9 @@ def preprocess_url(url):
     if 'docs.google.com' in url:
         # I'm manually downloading google-stored urls for now
         return None
-    url = url.replace('RC_CONTRACTS/', '/data/rc_contracts/raw/')
+    #url = url.replace('RC_CONTRACTS/', '/data/rc_contracts/raw/')
+    url = url.replace('RC_CONTRACTS/', 's3://sec-mining.
+openoil.net/rc_contracts/')
     return url
         
 def store_known_contracts(outdir):
