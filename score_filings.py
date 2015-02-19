@@ -1,5 +1,6 @@
 import argparse
 import codecs
+import os
 import re, math, string
 from urlparse import urljoin
 from unicodedata import normalize as ucnorm, category
@@ -201,7 +202,8 @@ if __name__ == '__main__':
     #parser.add_argument("--watershed", default="watershed_list.txt", help="file containing watershed file")
     #ARGS = parser.parse_args()
     class ARGS:
-        stopwords = 'stopwords.txt'
+        stopwords = os.path.join(os.path.dirname(__file__), 'stopwords.txt')
+        stopwords = '/tmp/stopwords.txt'
         watershed = '/tmp/watershed.txt'
 
     STOPWORDS = set(open(ARGS.stopwords).read().lower().split())

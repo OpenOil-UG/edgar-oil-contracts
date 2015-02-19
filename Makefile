@@ -23,7 +23,7 @@ SIC_LIST=data/sics.txt
 
 SEDAR_SCORE_FILE=/tmp/scored_sedar.json
 SEDAR_RESULT_FILE=/tmp/sedar_results.csv
-SEDAR_DL_DIR=/data/sedar/mining_material_documents_2014
+SEDAR_DL_DIR=/data/sedar/mining_material_documents_*
 
 
 
@@ -144,7 +144,9 @@ score_licenses:
 	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python score_filings.py | tee $(SCORE_FILE_LICENSES)
 
 score_pdfs:
-	find $(SEDAR_DL_DIR) -type f | python score_filings.py | tee $(SEDAR_SCORE_FILE)
+	#find $(SEDAR_DL_DIR) -type f | python score_filings.py -r local --jobconf mapred.job.maps=10 | tee $(SEDAR_SCORE_FILE)
+	find $(SEDAR_DL_DIR) -type f | python score_filings.py -r local --jobconf mapred.map.tasks=10 | tee $(SEDAR_SCORE_FILE)
+
 
 reduce_sedar_old:
 	less $(SEDAR_SCORE_FILE) | jq --raw-output '"\(.score),\(.filepath),¬\(.positives)¬,¬\(.country_names)¬,¬\(.extract)¬"' | sort -rn | sed -e 's/\/data\/sedar/https:\/\/sedar.openoil.net.s3.amazonaws.com/' -e "s/¬/\'/g" > $(SEDAR_RESULT_FILE)

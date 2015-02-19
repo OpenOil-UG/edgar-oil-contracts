@@ -64,6 +64,6 @@ def run_pipe(pin, pout, args):
 
 
 if __name__ == '__main__':
-    #parser = argparse.ArgumentParser()
-    #args = parser.parse_args()
+    parser = argparse.ArgumentParser()
+    args = parser.parse_args()
     run_pipe(sys.stdin, sys.stdout, args)
