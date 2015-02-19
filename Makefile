@@ -132,7 +132,7 @@ dl_filings:
 	cat filings_by_company.txt | python dl_filings.py --outdir $(FILING_DOWNLOAD_DIR)
 
 build_training_data:
-	python sheets.py --barndir $(TRAINING_POSITIVE_RAW_DIR) --posdir $(TRAINING_POSITIVE_DIR)
+	python build_training_data.py --barndir $(TRAINING_POSITIVE_RAW_DIR) --posdir $(TRAINING_POSITIVE_DIR)
 
 build_watershed_list:
 	python training/watershed.py --threshold 3 --pos_dir $(TRAINING_POSITIVE_DIR) --neg_dir training/data/negative > $(WATERSHED_FILE)
@@ -146,8 +146,11 @@ score_licenses:
 score_pdfs:
 	find $(SEDAR_DL_DIR) -type f | python score_filings.py | tee $(SEDAR_SCORE_FILE)
 
-reduce_sedar:
+reduce_sedar_old:
 	less $(SEDAR_SCORE_FILE) | jq --raw-output '"\(.score),\(.filepath),¬\(.positives)¬,¬\(.country_names)¬,¬\(.extract)¬"' | sort -rn | sed -e 's/\/data\/sedar/https:\/\/sedar.openoil.net.s3.amazonaws.com/' -e "s/¬/\'/g" > $(SEDAR_RESULT_FILE)
+
+reduce_sedar_new:
+	less $(SEDAR_SCORE_FILE) | python postprocess_json.py > $(SEDAR_RESULT_FILE)
 
 
 reduce_results:
