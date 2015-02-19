@@ -35,18 +35,18 @@ def review_sheets():
         ('1KzTj6GzRrxhsBDCiW_k9toCj5ekkK4PcPpzWNsu4ZlI',  'edgar second go, trying to filter out licenses'), 
         )
     for key, name in sheetlabels:
-        logging.warn('processing sheet %s' % name)
+        logging.debug('processing sheet %s' % name)
         st = sheets.CONN.open_by_key(key).sheet1
         for row in spreadsheet_rows(st):
             if len(row) < 3:
-                logging.warn('skipping too-short row')
+                logging.debug('skipping too-short row')
                 continue
             classification = row[2]
             if not (classification and classification.strip()):
-                logging.warn('skipping non-analyzed row')
+                logging.debug('skipping non-analyzed row')
                 continue
             url = row[1]
-            logging.warn('adding row to details')
+            logging.debug('adding row to details')
             details[url] = {
                 'classification': classification,
                 'sheet_key': key,

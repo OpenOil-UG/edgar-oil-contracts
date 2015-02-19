@@ -5,6 +5,7 @@ Also include other filtering
 '''
 
 import argparse
+import unicodecsv
 import json
 import csv
 import sys
@@ -16,7 +17,6 @@ def sortedjson(pin, args):
     '''
     '''
     jsons = [json.loads(ln) for ln in pin.readlines()]
-    print(jsons)
     jsons.sort(key=lambda x: int(x['score']), reverse=True)
     for j in jsons:
         yield json.dumps(j)
@@ -40,12 +40,12 @@ def is_reviewed(jline, args):
     return jline
 
 def run_pipe(pin, pout, args):
-    writer = csv.writer(sys.stdout)
+    writer = unicodecsv.writer(pout, encoding='utf-8')
 
     file_filters = [sortedjson]
     row_filters = [s3links, is_reviewed]
 
-    cols = ['score', 'filepath', 'positives', 'country_names', 'extract', 'reviewed']
+    cols = ['score', 'filepath','prior_review', 'positives', 'country_names', 'extract']
 
     for filt in file_filters:
         pin = filt(pin, args)
@@ -58,12 +58,12 @@ def run_pipe(pin, pout, args):
         rowdetails = [ jline.get(key, '') for key in cols]
         writer.writerow(rowdetails)
 
-    sys.stdout.flush()
+    pout.flush()
     
     
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    args = parser.parse_args()
+    #parser = argparse.ArgumentParser()
+    #args = parser.parse_args()
     run_pipe(sys.stdin, sys.stdout, args)

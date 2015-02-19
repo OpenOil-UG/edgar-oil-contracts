@@ -202,7 +202,7 @@ if __name__ == '__main__':
     #ARGS = parser.parse_args()
     class ARGS:
         stopwords = 'stopwords.txt'
-        watershed = 'watershed_list_licenses.txt'
+        watershed = '/tmp/watershed.txt'
 
     STOPWORDS = set(open(ARGS.stopwords).read().lower().split())
     SEARCHES = makesearchregex(ARGS.watershed)
