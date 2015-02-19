@@ -2,8 +2,17 @@
 BUCKET=s3://sec-mining.openoil.net
 CONF_FILE=mrjob.conf
 
+
 FILING_DOWNLOAD_DIR=/data/edgar_filings
 EXTRACTED_TEXT_DIR=/data/edgar_filings_text
+
+# where to put known contracts in pdf, html, etc formats
+# nb dir managed using barn (https://github.com/pudo/barn)
+TRAINING_POSITIVE_RAW_DIR=/tmp/contracts_raw 
+
+# where to put extracted text of known contracts
+TRAINING_POSITIVE_DIR=/tmp/contracts_positive
+
 WATERSHED_FILE=watershed_list.txt
 WATERSHED_FILE_LICENSES=watershed_list_licenses.txt
 SCORE_FILE=computed_scores.txt
@@ -15,6 +24,8 @@ SIC_LIST=data/sics.txt
 SEDAR_SCORE_FILE=/tmp/scored_sedar.json
 SEDAR_RESULT_FILE=/tmp/sedar_results.csv
 SEDAR_DL_DIR=/data/sedar/mining_material_documents_2014
+
+
 
 
 #####
@@ -120,11 +131,11 @@ minerals_reports:
 dl_filings:
 	cat filings_by_company.txt | python dl_filings.py --outdir $(FILING_DOWNLOAD_DIR)
 
-watershed_list_mining_basic:
-	python training/watershed.py --pos_dir training/data_mining/positive --neg_dir training/data/negative> $(WATERSHED_FILE)
+build_training_data:
+	python sheets.py --barndir $(TRAINING_POSITIVE_RAW_DIR) --posdir $(TRAINING_POSITIVE_DIR)
 
-watershed_list_mining_licenses:
-	python training/watershed.py --threshold 3 --pos_dir training/licenses/positive --neg_dir training/data/negative > $(WATERSHED_FILE_LICENSES)
+build_watershed_list:
+	python training/watershed.py --threshold 3 --pos_dir $(TRAINING_POSITIVE_DIR) --neg_dir training/data/negative > $(WATERSHED_FILE)
 
 score_by_filename:
 	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python score_filings.py | tee $(SCORE_FILE)
