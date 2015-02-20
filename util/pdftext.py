@@ -3,10 +3,15 @@ pull text from a PDF file
 '''
 import subprocess
 import tempfile
+import logging
 
 def pdf2text(fn):
-    bytestr = subprocess.check_output(['pdftotext', fn, '-'])
-    return bytestr.decode('utf-8', errors='ignore')
+    try:
+        bytestr = subprocess.check_output(['pdftotext', fn, '-'])
+        return bytestr.decode('utf-8', errors='ignore')
+    except subprocess.CalledProcessError:
+        logging.error('pdf processing error on %s' % fn)
+        return ''
 
 def pdfdata2txt(data):
     '''

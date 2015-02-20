@@ -1,9 +1,10 @@
-from score_filings import MRScoreFiles, normalize_text
+from score_filings import MRScorePDFs, normalize_text
 import codecs
 from collections import defaultdict
+import re
 
 
-class MrMatchFiles(MRScoreFiles):
+class MrMatchFiles(MRScorePDFs):
     '''
     Just
     '''
@@ -11,8 +12,14 @@ class MrMatchFiles(MRScoreFiles):
     THRESHOLD=0
 
     def mapper_init(self):
+        corptypes = re.compile(r'\b(limited|ltd|inc|sarl|plc)\b', re.I)
+        self.search_terms = []
         ft = codecs.open(self.SEARCHTERM_FILE, 'r', 'utf-8')
-        self.search_terms = [normalize_text(l) for l in ft.readlines()]
+        for l in ft.readlines():
+          subbed = corptypes.sub('', l)
+          normed = normalize_text(subbed)
+          if normed:
+              self.search_terms.append(normed)
 
     def getcontext(self, needle, haystack):
         wingers = 19 # how many chars of context to include each side

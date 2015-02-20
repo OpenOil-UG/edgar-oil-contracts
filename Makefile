@@ -148,11 +148,14 @@ score_pdfs:
 	find $(SEDAR_DL_DIR) -type f | python score_filings.py -r local --jobconf mapred.map.tasks=10 | tee $(SEDAR_SCORE_FILE)
 
 
+wordmatch:
+	find $(SEDAR_DL_DIR) -type f | python wordsearcher.py -r local --jobconf mapred.map.tasks=10 | tee /tmp/wordmatches.txt
+
 reduce_sedar_old:
 	less $(SEDAR_SCORE_FILE) | jq --raw-output '"\(.score),\(.filepath),¬\(.positives)¬,¬\(.country_names)¬,¬\(.extract)¬"' | sort -rn | sed -e 's/\/data\/sedar/https:\/\/sedar.openoil.net.s3.amazonaws.com/' -e "s/¬/\'/g" > $(SEDAR_RESULT_FILE)
 
-reduce_sedar_new:
-	less $(SEDAR_SCORE_FILE) | python postprocess_json.py > $(SEDAR_RESULT_FILE)
+reduce_sedar:
+	less $(SEDAR_SCORE_FILE) | python postprocess_json.py --include_old_reviews > $(SEDAR_RESULT_FILE)
 
 
 reduce_results:
