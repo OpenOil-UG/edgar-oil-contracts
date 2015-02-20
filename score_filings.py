@@ -111,6 +111,9 @@ def compute_score(doc):
     # score = score
     return score, tokens, len(pos_terms), dict(terms)
 
+def sterms():
+    SEARCHTERM_FILE='/tmp/searchterms.txt'
+
 
 class MRScoreFiles(MRJob):
     """
@@ -146,6 +149,8 @@ class MRScoreFiles(MRJob):
 class MRScorePDFs(MRScoreFiles):
     def text_from_file(self, filepath):
         return pdf2text(filepath)
+
+
 
 class MRScoreFilings(MRJob):
 
