@@ -31,8 +31,8 @@ def simplify_company_name(name):
     subbed = re.escape(subbed)
     if len(subbed) < 4:
         return r'.^'
-    if len(subbed) < 8:
-        return r'\b%s\b' % subbed
+    #if len(subbed) < 8:
+    #    return r'\b%s\b' % subbed
     return subbed
 
 def get_search_sheet():
