@@ -39,11 +39,18 @@ def is_reviewed(jline, args):
     jline['prior_review'] = prior_review
     return jline
 
+
+def countrynames(jline, args):
+    jline['country_names'] = ','.join(jline['country_names'])
+    return jline
+
 def run_pipe(pin, pout, args):
     writer = unicodecsv.writer(pout, encoding='utf-8')
 
     file_filters = [sortedjson]
-    row_filters = [s3links, is_reviewed]
+    row_filters = [countrynames, s3links]
+    if args.include_old_reviews:
+        row.filters.appened(is_reviewed)
 
     cols = ['score', 'filepath','prior_review', 'positives', 'country_names', 'extract']
 
@@ -65,5 +72,6 @@ def run_pipe(pin, pout, args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('--include_old_reviews', type=bool, default=False, help='include cross-reference against previous reviews?')
     args = parser.parse_args()
     run_pipe(sys.stdin, sys.stdout, args)
