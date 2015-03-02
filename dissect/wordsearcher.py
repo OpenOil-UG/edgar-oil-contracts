@@ -8,13 +8,20 @@ class MrMatchFiles(MRScorePDFs):
     '''
     Just
     '''
-    SEARCHTERM_FILE='/tmp/searchterms.txt'
     THRESHOLD=0
+
+
+    def configure_options(self):
+        super(MrMatchFiles, self).configure_options()
+        self.add_passthrough_option(
+            '--searchterm-file', default='/tmp/searchterms.txt',
+            help='File containing regexes to search for, one per line')
+
 
     def mapper_init(self):
         corptypes = re.compile(r'\b(limited|ltd|inc|sarl|plc)\b', re.I)
         self.search_terms = []
-        ft = codecs.open(self.SEARCHTERM_FILE, 'r', 'utf-8')
+        ft = codecs.open(self.options.searchterm_file, 'r', 'utf-8')
         for l in ft.readlines():
           subbed = corptypes.sub('', l)
           normed = normalize_text(subbed)
