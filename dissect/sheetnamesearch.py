@@ -24,7 +24,7 @@ def simplify_company_name(name):
      - short names get wrapped in word-boundary searches
      - very short names get skipped (create a non-matching regex)
     '''
-    corptypes = re.compile(r'\b(limited|ltd|inc|sarl|plc|gmbh)\b', re.I)
+    corptypes = re.compile(r'\b(limited|ltd|inc|sarl|plc|gmbh|sprl|s\.p\.r\.l)\b', re.I)
     name = name.lower().strip() # XXX probably want the standard normalizer here?
     subbed = corptypes.sub('', name)
     # remove chars with regex meaning
