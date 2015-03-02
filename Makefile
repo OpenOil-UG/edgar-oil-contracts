@@ -23,8 +23,7 @@ SIC_LIST=data/sics.txt
 
 SEDAR_SCORE_FILE=/tmp/scored_sedar.json
 SEDAR_RESULT_FILE=/tmp/sedar_results.csv
-SEDAR_DL_DIR=/data/sedar/mining_material_documents_*
-
+SEDAR_DL_DIR=/data/sedar/mining_material*
 
 WORDSEARCH_REGEXFILE=/tmp/company_name_regexes.txt
 WORDSEARCH_RESULTFILE=/tmp/company_name_results.json
@@ -163,11 +162,9 @@ reduce_sedar:
 reduce_results:
 	less $(SCORE_FILE) | jq --raw-output '"\(.score),\(.filepath)"' | sort -rn | head -n 1000 |cut -d, -f 2 | python edgar_link.py > $(RESULT_CSV_FILE)
 
-
-
 namesearch:
 	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_REGEXFILE) generate_searchterms
-	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | head | python dissect/wordsearcher.py --searchterm-file=$(WORDSEARCH_REGEXFILE) | tee $(WORDSEARCH_RESULTFILE)
+	find $(SEDAR_DL_DIR) -type f | head | python dissect/wordsearcher.py --searchterm-file=$(WORDSEARCH_REGEXFILE) | tee $(WORDSEARCH_RESULTFILE)
 	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_RESULTFILE) reconcile_results
 
 
