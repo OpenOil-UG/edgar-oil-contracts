@@ -1,5 +1,5 @@
 '''
-handle interaction with
+handle interaction with google docs
 '''
 
 try:
@@ -22,6 +22,7 @@ _auth()
 SHEETS = {
     'edgar_possible_contracts': '1KzTj6GzRrxhsBDCiW_k9toCj5ekkK4PcPpzWNsu4ZlI',
     'mining_contracts': '1jhEUfBaU8MmbSVDVrA8tEB-1-rypQcF78HzAw1ir1v0',
+    'reporting_companies': '1TOZfW0RI8K178v5mm_6vZBvILiGfIW5hLSDO5vCDQRM',
     }
 
 

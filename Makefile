@@ -1,4 +1,4 @@
-
+#SHELL=/bin/bash
 BUCKET=s3://sec-mining.openoil.net
 CONF_FILE=mrjob.conf
 
@@ -157,3 +157,11 @@ reduce_sedar_new:
 
 reduce_results:
 	less $(SCORE_FILE) | jq --raw-output '"\(.score),\(.filepath)"' | sort -rn | head -n 1000 |cut -d, -f 2 | python edgar_link.py > $(RESULT_CSV_FILE)
+
+
+
+
+namesearch:
+	# DOES NOT WORK 
+	TFNAME="$(shell python dissect/sheetnamesearch.py)"				
+	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | echo python dissect/score_filings.py --searchterm-file=$(TFNAME)
