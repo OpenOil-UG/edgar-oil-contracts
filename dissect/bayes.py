@@ -10,7 +10,7 @@ import sklearn.datasets
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
 
-from training import watershed
+from dissect.training import watershed
 
 DIRS = {'positive': 'training/data_bayes/positive',
         'negative': 'training/data_bayes/negative'}
