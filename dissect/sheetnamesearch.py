@@ -4,6 +4,7 @@ Sheetnamesearch
 Prepare names for working on the searches
 '''
 
+import argparse
 import re
 import tempfile
 import json
@@ -52,18 +53,18 @@ def names_searchable(rowcount = None):
     sheet.update_cells(output_cells)
     return sheet
 
-def searchterm_file():
+def searchterm_file(filename):
     '''
     generate file of search terms, one regex per line. return the filename
     assumes names_searchable has already been run
     '''
     sheet = get_search_sheet()
-    with tempfile.NamedTemporaryFile(delete=False) as tfile:
+    with open(filename, 'w') as tfile:
         cells = sheet.range('B2:B%s' % sheet.row_count)
         lines = [x.value + u'\n' for x in cells if x.value]
         lines = [x.encode('utf-8') for x in lines]
         tfile.writelines(lines)
-    return tfile.name
+    return filename
 
 
 
@@ -104,12 +105,17 @@ def reconcile_matches(fn, clear = True):
             match_counts[lineno-2].value = len(matches[lineno])
     sheet.update_cells(output_values)
     sheet.update_cells(match_counts)
-    print('done')
-            
-
 
 
 if __name__ == '__main__':
-    names_searchable()
-    tfn = searchterm_file()
-    print(tfn)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('action', choices=['generate_searchterms', 'reconcile_results'])
+    parser.add_argument('--filename', default='/tmp/namesearch_results',
+                        help="file to work with")
+    args = parser.parse_args()
+    if args.action == 'generate_searchterms':
+        names_searchable()
+        tfn = searchterm_file(args.filename)
+        print(tfn)
+    elif args.action == 'reconcile_results':
+        reconcile_matches(args.filename)

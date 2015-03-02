@@ -26,6 +26,8 @@ SEDAR_RESULT_FILE=/tmp/sedar_results.csv
 SEDAR_DL_DIR=/data/sedar/mining_material_documents_*
 
 
+WORDSEARCH_REGEXFILE=/tmp/company_name_regexes.txt
+WORDSEARCH_RESULTFILE=/tmp/company_name_results.json
 
 
 #####
@@ -163,8 +165,10 @@ reduce_results:
 
 
 
-
 namesearch:
-	# DOES NOT WORK 
-	TFNAME="$(shell python dissect/sheetnamesearch.py)"				
-	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | echo python dissect/score_filings.py --searchterm-file=$(TFNAME)
+	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_REGEXFILE) generate_searchterms
+	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | head | python dissect/wordsearcher.py --searchterm-file=$(WORDSEARCH_REGEXFILE) | tee $(WORDSEARCH_RESULTFILE)
+	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_RESULTFILE) reconcile_results
+
+
+
