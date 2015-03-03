@@ -1,7 +1,16 @@
+
+## Flags
+S3SYNC=false # do we upload everything to S3
+
 #SHELL=/bin/bash
 BUCKET=s3://sec-mining.openoil.net
 CONF_FILE=mrjob.conf
 
+# where to put the edgar indices
+COMPANY_LISTINGS_DIR=/data/company_listings
+
+# listings of every filing from a company we are interested in
+COMPANY_LISTINGS_FILTERED_DIR=/data/company_listings_filtered
 
 FILING_DOWNLOAD_DIR=/data/edgar_filings
 EXTRACTED_TEXT_DIR=/data/edgar_filings_text
@@ -106,12 +115,17 @@ sic_companies:
 	cat $(SIC_LIST) | python dissect/companies_by_sic.py > $(COMPANY_LIST)
 
 index_files:
-	python edgar_indices.py
-	aws s3 sync ./company_listings $(BUCKET)/company_listings
+	python dissect/edgar_indices.py --output-dir $(COMPANY_LISTINGS_DIR)
+	if [ $(S3SYNC) = "true" ]; then \
+		aws s3 sync $(COMPANY_LISTINGS_DIR) $(BUCKET)/company_listings ; \
+	fi
+
 
 filter_filings:
-	python filter_filings.py
-	aws s3 sync ./company_listings_filtered $(BUCKET)/company_listings_filtered
+	python dissect/filter_filings.py --input_dir $(COMPANY_LISTINGS_DIR) --output_dir $(COMPANY_LISTINGS_FILTERED_DIR) --company_list $(COMPANY_LIST)
+	if [ $(S3SYNC) = "true" ]; then \
+	  aws s3 sync $(COMPANY_LISTINGS_FILTERED_DIR) $(BUCKET)/company_listings_filtered; \
+	fi
 
 
 # ...and this version (should) work remotely, but is buggy

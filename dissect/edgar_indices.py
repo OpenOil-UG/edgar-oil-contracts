@@ -1,6 +1,6 @@
 import os, urllib2, logging
+import argparse
 
-OUTPUT_DIR='./company_listings'
 logging.basicConfig(level=logging.INFO)
 
 def urls():
@@ -10,18 +10,23 @@ def urls():
             filename = 'master_%s_%s.gz' % (year, qtr)
             yield url, filename
 
-def dl():
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
+def dl(output_dir):
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
     for (url, filename) in urls():
         logging.info('downloading %s' % url)
-        fp = '%s/%s' %(OUTPUT_DIR, filename)
-        if os.path.exists(fp): continue
+        fp = '%s/%s' %(output_dir, filename)
+        if os.path.exists(fp):
+            continue
         with open(fp, 'w') as f:
             f.write(urllib2.urlopen(url).read())
 
 
 if __name__ == '__main__':
-    dl()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--output-dir', default='./company_listings',
+                        help='where to put the edgar index files')
+    args = parser.parse_args()
+    dl(args.output_dir)
 
 
