@@ -18,6 +18,24 @@ generate a set of "watershed" terms which occur only in the contract
 documents and not in any others. This was used to generate a search list
 automatically, for a second phase of ranking.
 
+# Setup
+
+```
+git clone https://github.com/danohuiginn/edgar-oil-contracts.git
+cd edgar-oil-contracts
+mkvirtualenv openoil
+pip install -r requirements.txt
+python setup.py develop
+```
+
+# Overview of usage
+
+Most processes can be run through the makefile.
+
+You will probably want to change some of the variables at the top of the Makefile, for instance to set appropriate paths for your system.
+
+
+
 # Generating the watershed list
 
 put positive and negative examples in training/data/positive and training/data/negative
