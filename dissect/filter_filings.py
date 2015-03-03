@@ -4,8 +4,10 @@ import codecs
 import glob
 logging.basicConfig(level=logging.DEBUG)
 
+# monkeypatch gzip to ignore badly-terminated gz files
 
-
+def _read_eof(self): pass
+gzip.GzipFile._read_eof = _read_eof
 
 def cik_list(args):
     ciks = set()
@@ -16,7 +18,7 @@ def cik_list(args):
 
 def filter_company_filings(fn):
     try:
-        with codecs.getreader("utf-8")(gzip.open(fn)) as fh:
+        with gzip.open(fn) as fh:
             while '--------------------------------------' not in fh.readline():
                 pass # remove header bumf
             for line in fh:
@@ -24,7 +26,7 @@ def filter_company_filings(fn):
                 cik = items[0]
                 if cik in CIKS:
                     yield line
-    except EOFError:
+    except (EOFError, IOError):
         os.unlink(fn)
         logging.error('file %s is incomplete' % fn)
         

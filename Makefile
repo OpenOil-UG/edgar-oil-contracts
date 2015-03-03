@@ -1,20 +1,29 @@
 
 ## Flags
-S3SYNC=false # do we upload everything to S3
-INDUSTRY=oil #or mining
+# do we upload everything to S3
+S3SYNC=false
+INDUSTRY=mining
+
+BASEDIR=/data/$(INDUSTRY)
 
 #SHELL=/bin/bash
 BUCKET=s3://sec-mining.openoil.net
 CONF_FILE=mrjob.conf
 
+
+COMPANY_LIST=$(BASEDIR)/companies_by_sic.txt
+SIC_LIST=sics.txt
+
 # where to put the edgar indices
-COMPANY_LISTINGS_DIR=/data/company_listings
+COMPANY_LISTINGS_DIR=$(BASEDIR)/company_listings
 
 # listings of every filing from a company we are interested in
-COMPANY_LISTINGS_FILTERED_DIR=/data/company_listings_filtered
+COMPANY_LISTINGS_FILTERED_DIR=$(BASEDIR)/company_listings_filtered
 
-FILING_DOWNLOAD_DIR=/data/edgar_filings
-EXTRACTED_TEXT_DIR=/data/edgar_filings_text
+
+
+FILING_DOWNLOAD_DIR=$(BASEDIR)/edgar_filings
+EXTRACTED_TEXT_DIR=$(BASEDIR)/edgar_filings_text
 
 # where to put known contracts in pdf, html, etc formats
 # nb dir managed using barn (https://github.com/pudo/barn)
@@ -28,8 +37,7 @@ WATERSHED_FILE_LICENSES=watershed_list_licenses.txt
 SCORE_FILE=computed_scores.txt
 SCORE_FILE_LICENSES=computed_scores_licenses.txt
 RESULT_CSV_FILE=data/license_matches.txt
-COMPANY_LIST=data/companies_by_sic.txt
-SIC_LIST=data/sics.txt
+
 
 SEDAR_SCORE_FILE=/tmp/scored_sedar.json
 SEDAR_RESULT_FILE=/tmp/sedar_results.csv
@@ -121,7 +129,7 @@ reduce_results:
 
 namesearch:
 	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_REGEXFILE) generate_searchterms
-	find $(SEDAR_DL_DIR) -type f | head | python dissect/wordsearcher.py --searchterm-file=$(WORDSEARCH_REGEXFILE) | tee $(WORDSEARCH_RESULTFILE)
+	find $(SEDAR_DL_DIR) -type f | python dissect/wordsearcher.py --searchterm-file=$(WORDSEARCH_REGEXFILE) | tee $(WORDSEARCH_RESULTFILE)
 	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_RESULTFILE) reconcile_results
 
 

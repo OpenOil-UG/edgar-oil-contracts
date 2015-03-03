@@ -27,6 +27,7 @@ def simplify_company_name(name):
     corptypes = re.compile(r'\b(limited|ltd|inc|sarl|plc|gmbh|sprl|s\.p\.r\.l)\b', re.I)
     name = name.lower().strip() # XXX probably want the standard normalizer here?
     subbed = corptypes.sub('', name)
+    subbed = subbed.strip() # for spaces at end that were before 'limtied', etc
     # remove chars with regex meaning
     subbed = re.escape(subbed)
     if len(subbed) < 4:
