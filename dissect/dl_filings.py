@@ -23,13 +23,12 @@ config = {
     }
 
 
-OUTPUT_DIR = '/data/edgar_filings'
 
 def get_paths(line):
     (cik, name,filetype,date,url) = line.split('|')
     filename = url.split('/')[-1]
     filetype = filetype.replace('/', '')
-    dirpath = '%s/%s' % (OUTPUT_DIR, cik)
+    dirpath = '%s/%s' % (args.outdir, cik)
     if not os.path.exists(dirpath):
         os.makedirs(dirpath)
     outfn = '%s/%s_%s_%s' % (dirpath, filetype, date, filename)
@@ -89,7 +88,7 @@ def dl_queue(fh):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--outdir", default=OUTDIR, help="where to store the files dowloaded from edgar")
+    parser.add_argument("--outdir", help="where to store the files dowloaded from edgar")
     args = parser.parse_args()
-    OUTDIR=args.OUTDIR
+    #OUTDIR=args.outdir
     dl_queue(sys.stdin)
