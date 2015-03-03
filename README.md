@@ -34,12 +34,9 @@ Most processes can be run through the makefile.
 
 You will probably want to change some of the variables at the top of the Makefile, for instance to set appropriate paths for your system.
 
+The current setup assumes there is a directory /data, which is writeable by the user running the makefile
 
 
-# Generating the watershed list
-
-put positive and negative examples in training/data/positive and training/data/negative
-python watershed.py
 
 
 # The pipeline
@@ -81,6 +78,36 @@ Now we use [filter_filings.py](filter_filings.py) to select just the lines from 
 make filter_filings
 ```
 
+
+# Generating the watershed list
+
+put positive and negative examples in training/data/positive and training/data/negative
+python watershed.py
+
+# Working with google sheets
+
+We use google docs for output and review of contents.
+
+You will need a google account with access to the spreadsheets we are using
+
+Edit dissect/sheets.py to use your google login details (GUSER, GPS). To avoid accidentally committing sensitive information to github, you may want to put them in another file and import
+
+To refer to the sheets, you need to look at the ID in the url. e.g. if the URL is
+https://docs.google.com/spreadsheets/d/1TOZfW0RI8K178v5mm_6vZBvILiGfIW5hLSDO5vCDQRM/
+
+the ID is 1TOZfW0RI8K178v5mm_6vZBvILiGfIW5hLSDO5vCDQRM
+
+These IDS are in a dict in `dissect/sheets.py:SHEETS`
+
+
+## Finding company names
+
+We collect company names from EITI reporting at 
+https://docs.google.com/spreadsheets/d/1TOZfW0RI8K178v5mm_6vZBvILiGfIW5hLSDO5vCDQRM
+
+Company names go in column A.
+
+Run `make namesearch`. This will generate a regex from each sheet in column B. If you want to override any of these, you can put a replacement regex in column C, which will overrule anything in column B. To not search a company name, put in an impossible regex (e.g. .^). You may want this if the company name is also a common word, to avoid false positives.
 
 
 
