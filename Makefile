@@ -104,10 +104,10 @@ build_watershed_list:
 	python training/watershed.py --threshold 3 --pos_dir $(TRAINING_POSITIVE_DIR) --neg_dir training/data/negative > $(WATERSHED_FILE)
 
 score_by_filename:
-	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python score_filings.py | tee $(SCORE_FILE)
+	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python dissect/score_filings.py | tee $(SCORE_FILE)
 
 score_licenses:
-	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python score_filings.py | tee $(SCORE_FILE_LICENSES)
+	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python dissect/score_filings.py | tee $(SCORE_FILE_LICENSES)
 
 score_pdfs:
 	#find $(SEDAR_DL_DIR) -type f | python score_filings.py -r local --jobconf mapred.job.maps=10 | tee $(SEDAR_SCORE_FILE)

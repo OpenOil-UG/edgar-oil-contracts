@@ -6,8 +6,8 @@ from urlparse import urljoin
 from unicodedata import normalize as ucnorm, category
 from collections import defaultdict
 
-from util.pdftext import pdf2text
-from util.findcountries import countries_from_text
+from dissect.util.pdftext import pdf2text
+from dissect.util.findcountries import countries_from_text
 
 from mrjob.job import MRJob, JSONProtocol
 from mrjob.protocol import JSONValueProtocol
@@ -41,7 +41,7 @@ def makesearchregex(fn='searches.txt'):
 
 def normalize_text(text):
     if not isinstance(text, unicode):
-        text = unicode(text)
+        text = unicode(text, errors='ignore')
     chars = []
     # http://www.fileformat.info/info/unicode/category/index.htm
     for char in ucnorm('NFKD', text):
