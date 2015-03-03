@@ -41,7 +41,11 @@ RESULT_CSV_FILE=data/license_matches.txt
 
 SEDAR_SCORE_FILE=/tmp/scored_sedar.json
 SEDAR_RESULT_FILE=/tmp/sedar_results.csv
+#SEDAR_DL_DIR=/data/sedar/mining_material_documents_2005
 SEDAR_DL_DIR=/data/sedar/mining_material*
+
+
+
 
 WORDSEARCH_REGEXFILE=/tmp/company_name_regexes.txt
 WORDSEARCH_RESULTFILE=/tmp/company_name_results.json
@@ -129,7 +133,7 @@ reduce_results:
 
 namesearch:
 	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_REGEXFILE) generate_searchterms
-	find $(SEDAR_DL_DIR) -type f | python dissect/wordsearcher.py --searchterm-file=$(WORDSEARCH_REGEXFILE) | tee $(WORDSEARCH_RESULTFILE)
+	find $(SEDAR_DL_DIR) -type f | python dissect/wordsearcher.py --searchterm-file=$(WORDSEARCH_REGEXFILE) -r local --jobconf mapred.map.tasks=10 | tee $(WORDSEARCH_RESULTFILE)
 	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_RESULTFILE) reconcile_results
 
 

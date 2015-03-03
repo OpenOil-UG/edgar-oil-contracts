@@ -23,7 +23,6 @@ class cached(object):
         dirname = '%s/%s' % (cachedir, hexdigest[:2])
         cachefn = '%s/%s' % (dirname, hexdigest[2:])
         if os.path.exists(cachefn):
-            print('getting from cache')
             result = open(cachefn).read()
         else:
             if not os.path.exists(dirname):
