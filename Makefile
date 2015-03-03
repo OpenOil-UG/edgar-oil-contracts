@@ -103,7 +103,7 @@ text_extract:
 #  i.e. all companies in certain industries
 # This version will work without access to hadoop or Amazon EMR...
 sic_companies:
-	cat $(SIC_LIST) | python companies_by_sic.py > $(COMPANY_LIST)
+	cat $(SIC_LIST) | python dissect/companies_by_sic.py > $(COMPANY_LIST)
 
 index_files:
 	python edgar_indices.py
