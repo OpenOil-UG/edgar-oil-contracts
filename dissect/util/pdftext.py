@@ -8,7 +8,7 @@ import logging
 import os
 import sha
 import functools
-
+import yapot
 
 # store copies of our extracted pdfs
 cachedir = '/data/_pdftext_cache'
@@ -46,9 +46,9 @@ def pdf2text(fn):
         text =  bytestr.decode('utf-8', errors='ignore')
     except subprocess.CalledProcessError:
         logging.error('pdf processing error on %s' % fn)
-        text =  ''
+        text =  u''
     if not text.strip():
-        text = ocr(fn)
+        text = ocr(fn).decode('utf-8', errors='ignore')
     return text
 
 def pdfdata2txt(data):

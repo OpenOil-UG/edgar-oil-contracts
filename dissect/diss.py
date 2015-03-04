@@ -4,6 +4,7 @@ disSECt: contract mining in SEC
 '''
 import argcomplete
 import argparse
+import codecs
 from training import watershed
 import build_training_data
 import findimagefiles
@@ -45,7 +46,7 @@ class MRRunner(Runner):
         return [fh.name]
 
     def run(self):
-        job = findimagefiles.self.MRCLASS(args=self.mr_args())
+        job = self.MRCLASS(args=self.mr_args())
         if self.args.outfile:
             output = codecs.open(self.args.outfile, 'w', 'utf-8')
         else:
@@ -58,11 +59,15 @@ class MRRunner(Runner):
 class FindImageFiles(MRRunner):
     MRCLASS=findimagefiles.ImagePDFs
 
+    def mr_args(self):
+        standard_options = ['-r', 'local', '--jobconf', 'mapred.map.tasks=2']
+        return self.input_file() + standard_options
+
+
 class ScoreRunner(MRRunner):
     MRCLASS=score_filings.MRScoreFilings
 
-    def __init__(self, *args, **kwargs):
-        MRRunner.__init__(self, *args, **kwargs)
+
         
 
 TASKS = {
