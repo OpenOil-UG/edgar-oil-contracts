@@ -2,20 +2,23 @@
 ## Flags
 # do we upload everything to S3
 S3SYNC=false
-INDUSTRY=mining
+#INDUSTRY=oil
 
-BASEDIR=/data/$(INDUSTRY)
+ROOTDIR=/data
+BASEDIR=$(ROOTDIR)/$(INDUSTRY)
 
 #SHELL=/bin/bash
 BUCKET=s3://sec-mining.openoil.net
 CONF_FILE=mrjob.conf
 
 
-COMPANY_LIST=$(BASEDIR)/companies_by_sic.txt
-SIC_LIST=sics.txt
+COMPANY_LIST=$(BASEDIR)/companies_by_sic_$(INDUSTRY).txt
 
-# where to put the edgar indices
-COMPANY_LISTINGS_DIR=$(BASEDIR)/company_listings
+SIC_LIST=sics_$(INDUSTRY).txt
+
+
+# where to put the edgar indices. This crosses both oil and mining
+COMPANY_LISTINGS_DIR=$(ROOTDIR)/company_listings
 
 # listings of every filing from a company we are interested in
 COMPANY_LISTINGS_FILTERED_DIR=$(BASEDIR)/company_listings_filtered
@@ -68,6 +71,8 @@ WORDSEARCH_RESULTFILE=/tmp/company_name_results.json
 sic_companies:
 	cat $(SIC_LIST) | python dissect/companies_by_sic.py > $(COMPANY_LIST)
 
+
+# this works for all cases
 index_files:
 	python dissect/edgar_indices.py --output-dir $(COMPANY_LISTINGS_DIR)
 	if [ $(S3SYNC) = "true" ]; then \
