@@ -78,11 +78,35 @@ Now we use [filter_filings.py](filter_filings.py) to select just the lines from 
 make filter_filings
 ```
 
+# Download the filings themselves
+
+This is the time-consuming bit:
+
+```
+make dl_filings
+```
+
+
+# Finding contracts
+
+To find contracts among edgar filings, we:
+
+1) manually collect some example contracts, as well as some example non-contract filings
+2) generate a list of phrases which appear more frequently among contracts than non-contracts
+3) count how many times each of these phrases appear in our downloaded edgar filings. Generate a one-line json document for each matching document, showing the matching terms in context
+4) convert that json file into csv
+5) (manually) upload that csv file to google docs for review
+
 
 # Generating the watershed list
 
 put positive and negative examples in training/data/positive and training/data/negative
-python watershed.py
+
+```
+make build_watershed_list
+```
+
+
 
 # Working with google sheets
 

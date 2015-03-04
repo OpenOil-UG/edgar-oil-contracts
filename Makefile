@@ -102,7 +102,7 @@ minerals_reports:
 
 
 build_training_data:
-	python build_training_data.py --barndir $(TRAINING_POSITIVE_RAW_DIR) --posdir $(TRAINING_POSITIVE_DIR)
+	python dissect/dissect.py build_training_data --barndir $(TRAINING_POSITIVE_RAW_DIR) --pos_dir $(TRAINING_POSITIVE_DIR) --include_text_directory /data/drivelicenses
 
 build_watershed_list:
 	python training/watershed.py --threshold 3 --pos_dir $(TRAINING_POSITIVE_DIR) --neg_dir training/data/negative > $(WATERSHED_FILE)

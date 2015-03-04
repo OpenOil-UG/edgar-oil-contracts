@@ -36,7 +36,7 @@ def normalize_text(text):
 def listdir_recursive(path):
     return (os.path.join(dp, f) for dp, dn, fn in os.walk(path) for f in fn)
 
-def read_texts(directory):
+def read_texts(directory, ngram_max):
     for fn in listdir_recursive(directory):
         with codecs.open(fn, 'r', 'utf-8', errors='ignore') as fh:
             logging.debug('reading %s' % fn)
@@ -45,7 +45,7 @@ def read_texts(directory):
             try:
                 # text = text.decode('utf-8')
                 norm = normalize_text(text)
-                for n in range(1, ARGS.ngram_max+1):
+                for n in range(1, ngram_max+1):
                     for grams in ngrams(norm.split(), n):
                         gt = ' '.join(grams)
                         yield fn, gt
@@ -53,14 +53,19 @@ def read_texts(directory):
                 print "FAIL", fn
 
 
-def run(pos_dirs, neg_dirs, threshold):
+def run(pos_dirs, neg_dirs, threshold, ngram_max, outfn):
+    if outfn == '-':
+        outfh = sys.stdout
+    else:
+        outfh = codecs.open(outfn, 'w', 'utf-8')
+    
     features = defaultdict(set)
     for pos_dir in pos_dirs:
-        for fn, gt in read_texts(pos_dir):
+        for fn, gt in read_texts(pos_dir, ngram_max):
             features[gt].add(fn)
     
     for neg_dir in neg_dirs:
-        for fn, gt in read_texts(neg_dir):
+        for fn, gt in read_texts(neg_dir, ngram_max):
             if gt in features:
                 try:
                     features[gt].pop()
@@ -72,15 +77,21 @@ def run(pos_dirs, neg_dirs, threshold):
     for gt, fn in fs:
         if fn > threshold:
             try:
-                print u"%s,%s" % (gt, fn)
+                outfh.write(u"%s,%s\n" % (gt, fn))
             except Exception:
                 import pdb; pdb.set_trace()
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+def build_parser(parser=None):
+    parser = parser or argparse.ArgumentParser()
     parser.add_argument("--pos_dir", default=[], help="Directory containing text files like the ones we want to find", action='append')
     parser.add_argument("--neg_dir", default=[], help="Directory containing text files NOT like the ones we want to find", action='append')
     parser.add_argument("--threshold", default=2, type=int, help="exclude ngrams which occur less this often in the training data")
     parser.add_argument("--ngram_max", default=6, type=int, help="include ngrams up to this many words long")
+    parser.add_argument('--outfile', default='-', help="where to write results ('-' for stdout)")
+    return parser
+
+if __name__ == '__main__':
+    parser = build_parser()
     ARGS = parser.parse_args()
-    run(pos_dirs=ARGS.pos_dir, neg_dirs=ARGS.neg_dir, threshold=ARGS.threshold)
+    run(pos_dirs=ARGS.pos_dir, neg_dirs=ARGS.neg_dir, threshold=ARGS.threshold,
+        ngram_max=ARGS.ngram_max, outfn=ARGS.outfile)

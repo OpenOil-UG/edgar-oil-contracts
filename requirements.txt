@@ -8,3 +8,4 @@ scikit-learn
 gspread
 google-api-python-client
 functools32
+argcomplete

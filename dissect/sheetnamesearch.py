@@ -39,16 +39,20 @@ def simplify_company_name(name):
 def get_search_sheet():
     book = sheets.CONN.open_by_key(sheets.SHEETS['reporting_companies'])
     return book.worksheet("Company Searches")
-
-def names_searchable(rowcount = None):
+    
+def names_searchable(rowcount = None,
+                     source_col = 'A',
+                     output_col = 'B',
+                     manual_col = 'C',
+                 ):
     sheet = get_search_sheet()
     
     # supplying rowcount is just an efficiency hack
     # to stop gspread working through hundreds of blank lines
     rowcount = rowcount or sheet.row_count
-    source_cells = sheet.range('A2:A%s' % rowcount)
-    output_cells = sheet.range('B2:B%s' % rowcount)
-    manual_cells = sheet.range('C2:C%s' % rowcount)
+    source_cells = sheet.range('%s2:%s%s' % (source_col, source_col, rowcount))
+    output_cells = sheet.range('%s2:%s%s' % (output_col, output_col, rowcount))
+    manual_cells = sheet.range('%s2:%s%s' % (manual_col, manual_col, rowcount))
     for (incell, outcell, manualcell) in zip(source_cells, output_cells, manual_cells):
         outcell.value = manualcell.value or simplify_company_name(incell.value)
     sheet.update_cells(output_cells)
