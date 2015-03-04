@@ -58,7 +58,12 @@ class MRRunner(Runner):
 class FindImageFiles(MRRunner):
     MRCLASS=findimagefiles.ImagePDFs
 
+class ScoreRunner(MRRunner):
+    MRCLASS=score_filings.MRScoreFilings
 
+    def __init__(self, *args, **kwargs):
+        MRRunner.__init__(self, *args, **kwargs)
+        
 
 TASKS = {
     'download_data': '',
