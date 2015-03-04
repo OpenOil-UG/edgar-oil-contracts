@@ -9,6 +9,7 @@ import build_training_data
 import findimagefiles
 import tempfile
 import subprocess
+import sys
 
 class Runner:
     
@@ -43,14 +44,20 @@ class MRRunner(Runner):
         fh.write(subprocess.check_output(fn_search))
         return [fh.name]
 
-class FindImageFiles(MRRunner):
-
     def run(self):
-        job = findimagefiles.ImagePDFs(args=self.mr_args())
+        job = findimagefiles.self.MRCLASS(args=self.mr_args())
+        if self.args.outfile:
+            output = codecs.open(self.args.outfile, 'w', 'utf-8')
+        else:
+            output = sys.stdout
         with job.make_runner() as runner:
             runner.run()
             for line in runner.stream_output():
-                print(line)
+                output.write(line)
+
+class FindImageFiles(MRRunner):
+    MRCLASS=findimagefiles.ImagePDFs
+
 
 
 TASKS = {
