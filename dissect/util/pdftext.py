@@ -24,6 +24,7 @@ class cached(object):
         cachefn = '%s/%s' % (dirname, hexdigest[2:])
         if os.path.exists(cachefn):
             result = open(cachefn).read()
+            return result
         else:
             if not os.path.exists(dirname):
                 os.makedirs(dirname)
@@ -32,16 +33,23 @@ class cached(object):
                 fh.write(result)
         return result
             
-    
+
+def ocr(fn):
+    success, text = yapot.convert_document(fn)
+    if success:
+        return text
 
 @cached
 def pdf2text(fn):
     try:
         bytestr = subprocess.check_output(['pdftotext', fn, '-'])
-        return bytestr.decode('utf-8', errors='ignore')
+        text =  bytestr.decode('utf-8', errors='ignore')
     except subprocess.CalledProcessError:
         logging.error('pdf processing error on %s' % fn)
-        return ''
+        text =  ''
+    if not text.strip():
+        text = ocr(fn)
+    return text
 
 def pdfdata2txt(data):
     '''

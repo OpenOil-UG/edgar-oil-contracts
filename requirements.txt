@@ -10,3 +10,5 @@ google-api-python-client
 functools32
 argcomplete
 barn
+pyPdf
+yapot

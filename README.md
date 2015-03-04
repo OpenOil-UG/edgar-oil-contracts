@@ -134,6 +134,15 @@ Company names go in column A.
 Run `make namesearch`. This will generate a regex from each sheet in column B. If you want to override any of these, you can put a replacement regex in column C, which will overrule anything in column B. To not search a company name, put in an impossible regex (e.g. .^). You may want this if the company name is also a common word, to avoid false positives.
 
 
+# OCR
+
+To extract text from image-only PDFs, you'll need to install imagemagic, tesseract and qpdf:
+
+```
+sudo apt-get install imagemagick libmagickcore-dev
+sudo apt-get install tesseract-ocr
+sudo apt-get install qpdf
+```
 
 
 Contact:
