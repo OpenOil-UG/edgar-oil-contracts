@@ -21,7 +21,7 @@ class Runner:
 class WatershedRunner(Runner):
 
     def run(self):
-        watershed.run(pos_dirs=self.args.pos_dir, neg_dirs=self.args.neg_dir, threshold=self.args.threshold, ngram_max=self.args.ngram_max, outfn=self.args.oufile)
+        watershed.run(pos_dirs=self.args.pos_dir, neg_dirs=self.args.neg_dir, threshold=self.args.threshold, ngram_max=self.args.ngram_max, outfn=self.args.outfile)
 
 class BuildTrainingDataRunner(Runner):
 
@@ -69,6 +69,7 @@ def add_shared_args(parser):
     parser.add_argument('--source', choices=SOURCES, default=None, help="which set of filings do we care about?")
     parser.add_argument('--last_year', type=int, default=2014, help="the most recent year (inclusive) to work on")
     parser.add_argument('--first_year', type=int, default=2000, help="the earliest year (inclusive) to work on")
+    parser.add_argument('--outfile', help="where to put output")
     return parser
 
 

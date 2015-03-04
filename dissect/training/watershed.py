@@ -87,7 +87,10 @@ def build_parser(parser=None):
     parser.add_argument("--neg_dir", default=[], help="Directory containing text files NOT like the ones we want to find", action='append')
     parser.add_argument("--threshold", default=2, type=int, help="exclude ngrams which occur less this often in the training data")
     parser.add_argument("--ngram_max", default=6, type=int, help="include ngrams up to this many words long")
-    parser.add_argument('--outfile', default='-', help="where to write results ('-' for stdout)")
+    try:
+        parser.add_argument('--outfile', default='-', help="where to write results ('-' for stdout)")
+    except argparse.ArgumentError:
+        pass
     return parser
 
 if __name__ == '__main__':
