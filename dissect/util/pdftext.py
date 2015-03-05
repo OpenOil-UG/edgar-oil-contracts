@@ -38,6 +38,8 @@ def ocr(fn):
     success, text = yapot.convert_document(fn)
     if success:
         return text
+    else:
+        return ''
 
 @cached
 def pdf2text(fn):
