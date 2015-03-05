@@ -110,7 +110,8 @@ build_training_data:
 	python dissect/dissect.py build_training_data --barndir $(TRAINING_POSITIVE_RAW_DIR) --pos_dir $(TRAINING_POSITIVE_DIR) --include_text_directory /data/drivelicenses
 
 build_watershed_list:
-	python training/watershed.py --threshold 3 --pos_dir $(TRAINING_POSITIVE_DIR) --neg_dir training/data/negative > $(WATERSHED_FILE)
+	python dissect/diss.py build_watershed --threshold 3 --pos_dir $(TRAINING_POSITIVE_DIR) --neg_dir training/data/negative > $(WATERSHED_FILE)
+	#python training/watershed.py --threshold 3 --pos_dir $(TRAINING_POSITIVE_DIR) --neg_dir training/data/negative > $(WATERSHED_FILE)
 
 score_by_filename:
 	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python dissect/score_filings.py | tee $(SCORE_FILE)
@@ -140,6 +141,14 @@ namesearch:
 	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_REGEXFILE) generate_searchterms
 	find $(SEDAR_DL_DIR) -type f | python dissect/wordsearcher.py --searchterm-file=$(WORDSEARCH_REGEXFILE) -r local --jobconf mapred.map.tasks=10 | tee $(WORDSEARCH_RESULTFILE)
 	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_RESULTFILE) reconcile_results
+
+text_extract:
+	python dissect/util/edgar_text_extract.py --filingdir $(FILING_DOWNLOAD_DIR) --outdir $(EXTRACTED_TEXT_DIR)
+
+
+## Systematic work on watershed list
+
+### Building the watershed list
 
 
 
@@ -200,7 +209,3 @@ make_listing:
 
 dl_filings_test:
 	head -20 filings_by_company.txt | python dl_filings.py --outdir $(FILING_DOWNLOAD_DIR)
-
-text_extract:
-	python dissect/util/edgar_text_extract.py --filingdir $(FILING_DOWNLOAD_DIR) --outdir $(EXTRACTED_TEXT_DIR)
-

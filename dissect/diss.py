@@ -8,6 +8,7 @@ import codecs
 from training import watershed
 import build_training_data
 import findimagefiles
+import score_filings
 import tempfile
 import subprocess
 import sys
@@ -31,10 +32,10 @@ class BuildTrainingDataRunner(Runner):
         build_training_data.run(self.args)
 
 class MRRunner(Runner):
+    standard_options = ['-r', 'local', '--jobconf', 'mapred.map.tasks=10']
     
     def mr_args(self):
-        standard_options = ['-r', 'local', '--jobconf', 'mapred.map.tasks=10']
-        return self.input_file() + standard_options
+        return self.input_file() + self.standard_options
 
     def input_file(self):
         dirname = args.source_directory
@@ -59,22 +60,27 @@ class MRRunner(Runner):
 class FindImageFiles(MRRunner):
     MRCLASS=findimagefiles.ImagePDFs
 
+
     def mr_args(self):
-        standard_options = ['-r', 'local', '--jobconf', 'mapred.map.tasks=2']
-        return self.input_file() + standard_options
+        options = ['-r', 'local', '--jobconf', 'mapred.map.tasks=2']
+        return self.input_file() + options
 
 
 class ScoreRunner(MRRunner):
-    MRCLASS=score_filings.MRScoreFilings
+    MRCLASS=score_filings.MRScoreFiles
 
-
-        
+    def mr_args(self):
+        assert self.args.watershed and self.args.stopwords 
+        customargs = ['--watershed', '/tmp/watershed_list.txt', '--stopwords', '/tmp/stopwords.txt']
+        if self.args.pdf_input:
+            customargs.append('--pdf_input')
+        return self.standard_options + customargs
 
 TASKS = {
     'download_data': '',
     'build_training_data': BuildTrainingDataRunner,
     'build_watershed': WatershedRunner,
-    'score_documents': '',
+    'score_documents': ScoreRunner,
     'find_image_files': FindImageFiles,
     }
 
@@ -105,6 +111,11 @@ def build_argparser(parser=None):
 
     mapreduce_group = parser.add_argument_group('mapreduce', description='Options common to running mapreduce jobs (scoring, watershed, etc)')
     mapreduce_group.add_argument('--source-directory', help='Directory containing input files for the job. If not supplied, use stdin (expecting a list of files)')
+
+    mapreduce_group.add_argument('--watershed', help='Full path to file containing watershed list')
+    mapreduce_group.add_argument('--stopwords', help='Full path to file containing watershed list')
+    mapreduce_group.add_argument('--pdf_input', help='Expect input files in PDF format; extract text from them before processing', action="store_true", default=False)
+
 
     argcomplete.autocomplete(parser)
     return parser

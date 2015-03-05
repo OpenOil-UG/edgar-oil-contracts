@@ -1,10 +1,10 @@
-from score_filings import MRScorePDFs, normalize_text
+from score_filings import MRScoreFiles, normalize_text
 import codecs
 from collections import defaultdict
 import re
 
 
-class MrMatchFiles(MRScorePDFs):
+class MrMatchFiles(MRScoreFiles):
     '''
     Just
     '''
