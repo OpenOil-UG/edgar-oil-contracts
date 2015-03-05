@@ -4,9 +4,10 @@ import barn
 import codecs
 import glob
 import logging
-import nltk
 import os
 from util import pdftext
+from bs4 import BeautifulSoup
+
 
 def known_contracts(sheetid):
     book = CONN.open_by_key(sheetid)
@@ -52,9 +53,8 @@ def store_known_contracts(args):
         res = coll.ingest(url)
     print('done')
 
-# XXX write these!!!
 def extracthtml(txt):
-    return nltk.clean_html(txt)
+    return BeautifulSoup(txt).get_text()
 
 def extractpdf(pdf):
     return pdftext.pdfdata2txt(pdf)

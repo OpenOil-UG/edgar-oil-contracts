@@ -107,11 +107,10 @@ minerals_reports:
 
 
 build_training_data:
-	python dissect/dissect.py build_training_data --barndir $(TRAINING_POSITIVE_RAW_DIR) --pos_dir $(TRAINING_POSITIVE_DIR) --include_text_directory /data/drivelicenses
+	python dissect/diss.py build_training_data --barndir $(TRAINING_POSITIVE_RAW_DIR) --pos_dir $(TRAINING_POSITIVE_DIR) --include_text_directory /data/drivelicenses
 
 build_watershed_list:
-	python dissect/diss.py build_watershed --threshold 3 --pos_dir $(TRAINING_POSITIVE_DIR) --neg_dir training/data/negative > $(WATERSHED_FILE)
-	#python training/watershed.py --threshold 3 --pos_dir $(TRAINING_POSITIVE_DIR) --neg_dir training/data/negative > $(WATERSHED_FILE)
+	python dissect/diss.py build_watershed --threshold 3 --pos_dir $(TRAINING_POSITIVE_DIR) --neg_dir training/data/negative --outfile $(WATERSHED_FILE)
 
 score_by_filename:
 	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python dissect/score_filings.py | tee $(SCORE_FILE)
@@ -131,7 +130,7 @@ reduce_sedar_old:
 	less $(SEDAR_SCORE_FILE) | jq --raw-output '"\(.score),\(.filepath),¬\(.positives)¬,¬\(.country_names)¬,¬\(.extract)¬"' | sort -rn | sed -e 's/\/data\/sedar/https:\/\/sedar.openoil.net.s3.amazonaws.com/' -e "s/¬/\'/g" > $(SEDAR_RESULT_FILE)
 
 reduce_sedar:
-	less $(SEDAR_SCORE_FILE) | python postprocess_json.py --include_old_reviews > $(SEDAR_RESULT_FILE)
+	less $(SEDAR_SCORE_FILE) | python dissect/postprocess_json.py --include_old_reviews > $(SEDAR_RESULT_FILE)
 
 
 reduce_results:

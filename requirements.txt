@@ -12,3 +12,4 @@ argcomplete
 barn
 pyPdf
 yapot
+beautifulsoup4
