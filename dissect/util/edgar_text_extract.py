@@ -7,22 +7,26 @@ import os
 from lxml import html
 import argparse
 
-def walkdir(filingdir, outdir):
+def walkdir(filingdir, outdir, skip_existing=True):
     parser = html.HTMLParser(recover=True)
     for (dirpath, dirnames, filenames) in os.walk(filingdir):
         for filename in filenames:
             if '_extracted_' in filename:
                 continue # don't eat our own tail
-            print('handling %s' % filename)
             filepath_in = os.path.join(dirpath, filename)
             dirpath_out = dirpath.replace(filingdir, outdir)
             if not os.path.exists(dirpath_out):
                 os.makedirs(dirpath_out)
             filepath_out_base = dirpath_out + filename + '_extracted_%s.txt'
             with open(filepath_in) as fin:
-                doc = html.fromstring(fin.read(), parser=parser)
+                doc = html.fromstring(fin.read(), parser=parser)                
+                if skip_existing and os.path.exists(filepath_out_base % 1):
+                    print('skipping %s' % filepath_out_base % 1)
+                    continue
+                print('handling %s' % filename)
                 for i, docpart in enumerate(doc.findall('.//document')):
-                    outfile = codecs.open(filepath_out_base % i, 'w', 'utf-8')
+                    docpart_path = filepath_out_base % i
+                    outfile = codecs.open(docpart_path, 'w', 'utf-8')
                     outfile.write(docpart.text_content())
 
 
