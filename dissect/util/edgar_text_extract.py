@@ -21,7 +21,7 @@ def walkdir(filingdir, outdir, skip_existing=True):
             filepath_out_base = dirpath_out + '/' + filename + '_extracted_%s.txt'
             with open(filepath_in) as fin:
                 if skip_existing and os.path.exists(filepath_out_base % 0):
-                    print('skipping %s' % filepath_out_base % 0)
+                    #print('skipping %s' % filepath_out_base % 0)
                     continue
                 try:
                     doc = html.fromstring(fin.read(), parser=parser)

@@ -152,7 +152,12 @@ grep_for_projects:
 	# Build a list of every edgar filing that contains the word 'project' (capitalized)
 	LC=ALL fgrep -rl "Project" /data/mining/edgar_filings_text/ /data/oil/edgar_filings_text | tee /tmp/edgar_filings_containing_project.txt
 
+grep_for_projects_oil:
+	# Build a list of every edgar filing that contains the word 'project' (capitalized)
+	LC=ALL fgrep -rl "Project" /data/oil/edgar_filings_text | tee /tmp/edgar_filings_containing_project_oil.txt
 
+project_details_oil:
+	cat /tmp/edgar_filings_containing_project_oil.txt | python dissect/projectsearch.py | tee /tmp/project_oil_details.csv
 
 
 #####
