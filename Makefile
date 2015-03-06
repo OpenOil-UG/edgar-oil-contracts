@@ -136,24 +136,21 @@ reduce_sedar:
 reduce_results:
 	less $(SCORE_FILE) | jq --raw-output '"\(.score),\(.filepath)"' | sort -rn | head -n 1000 |cut -d, -f 2 | python edgar_link.py > $(RESULT_CSV_FILE)
 
-namesearch_old:
-	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_REGEXFILE) generate_searchterms
-	find $(SEDAR_DL_DIR) -type f | python dissect/wordsearcher.py --searchterm-file=$(WORDSEARCH_REGEXFILE) -r local --jobconf mapred.map.tasks=10 | tee $(WORDSEARCH_RESULTFILE)
-	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_RESULTFILE) reconcile_results
 
 namesearch:
-	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_REGEXFILE) generate_searchterms
-	find /data/oil/edgar_filings_text -type f | python dissect/wordsearcher.py --searchterm-file=$(WORDSEARCH_REGEXFILE) -r local --jobconf mapred.map.tasks=10 | tee $(WORDSEARCH_RESULTFILE)
-	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_RESULTFILE) reconcile_results
+	#python dissect/sheetnamesearch.py --filename $(WORDSEARCH_REGEXFILE) generate_searchterms
+	find /data/oil/edgar_filings_text -type f | head -n 300 | python dissect/wordsearcher.py --searchterm-file=$(WORDSEARCH_REGEXFILE) --regex -r local --jobconf mapred.map.tasks=10 | tee $(WORDSEARCH_RESULTFILE)
+	#python dissect/sheetnamesearch.py --filename $(WORDSEARCH_RESULTFILE) reconcile_results
 
 
 text_extract:
 	python dissect/util/edgar_text_extract.py --filingdir $(FILING_DOWNLOAD_DIR) --outdir $(EXTRACTED_TEXT_DIR)
 
 
-## Systematic work on watershed list
 
-### Building the watershed list
+grep_for_projects:
+	# Build a list of every edgar filing that contains the word 'project' (capitalized)
+	LC=ALL fgrep -rl "Project" /data/mining/edgar_filings_text/ /data/oil/edgar_filings_text | tee /tmp/edgar_filings_containing_project.txt
 
 
 
@@ -214,3 +211,4 @@ make_listing:
 
 dl_filings_test:
 	head -20 filings_by_company.txt | python dl_filings.py --outdir $(FILING_DOWNLOAD_DIR)
+

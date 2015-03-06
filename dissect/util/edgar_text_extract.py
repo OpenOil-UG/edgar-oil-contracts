@@ -5,6 +5,7 @@ Extract text parts from EDGAR filigs
 import codecs
 import os
 from lxml import html
+from lxml.etree import XMLSyntaxError
 import argparse
 
 def walkdir(filingdir, outdir, skip_existing=True):
@@ -19,9 +20,13 @@ def walkdir(filingdir, outdir, skip_existing=True):
                 os.makedirs(dirpath_out)
             filepath_out_base = dirpath_out + '/' + filename + '_extracted_%s.txt'
             with open(filepath_in) as fin:
-                doc = html.fromstring(fin.read(), parser=parser)                
-                if skip_existing and os.path.exists(filepath_out_base % 1):
-                    print('skipping %s' % filepath_out_base % 1)
+                if skip_existing and os.path.exists(filepath_out_base % 0):
+                    print('skipping %s' % filepath_out_base % 0)
+                    continue
+                try:
+                    doc = html.fromstring(fin.read(), parser=parser)
+                except XMLSyntaxError:
+                    print('parse error for %s' % filepath_in)
                     continue
                 print('handling %s' % filename)
                 for i, docpart in enumerate(doc.findall('.//document')):

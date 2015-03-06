@@ -2,6 +2,7 @@ from score_filings import MRScoreFiles, normalize_text
 import codecs
 from collections import defaultdict
 import re
+import logging
 
 
 class MrMatchFiles(MRScoreFiles):
@@ -16,6 +17,9 @@ class MrMatchFiles(MRScoreFiles):
         self.add_passthrough_option(
             '--searchterm-file', default='/tmp/searchterms.txt',
             help='File containing regexes to search for, one per line')
+        self.add_passthrough_option(
+            '--regex', default=False, action='store_true',
+            help='Search regexes, instead of plain matches')
 
 
     def mapper_init(self):
@@ -23,10 +27,14 @@ class MrMatchFiles(MRScoreFiles):
         self.search_terms = []
         ft = codecs.open(self.options.searchterm_file, 'r', 'utf-8')
         for l in ft.readlines():
-          subbed = corptypes.sub('', l)
-          normed = normalize_text(subbed)
-          if normed:
-              self.search_terms.append(normed)
+          pattern = corptypes.sub('', l)
+          pattern = pattern.strip().lower()
+          #pattern = normalize_text(pattern)
+          if pattern:
+              print(pattern, normalize_text(pattern))
+              if self.options.regex:
+                  pattern = re.compile(pattern)
+              self.search_terms.append(pattern)
 
     def getcontext(self, needle, haystack):
         wingers = 19 # how many chars of context to include each side
@@ -34,7 +42,17 @@ class MrMatchFiles(MRScoreFiles):
         end = start + len(needle) + wingers
         return haystack[start:end]
 
+    def greptext_regex(self, filetext):
+        matches  = defaultdict(list)
+        for term in self.search_terms:
+            matched = term.search(filetext)
+            if matched:
+                matches[term.pattern].append(self.getcontext(matched.group(0), filetext))
+        return matches
+
     def greptext(self, filetext):
+        if self.options.regex:
+            return self.greptext_regex(filetext)
         matches  = defaultdict(list)
         for term in self.search_terms:
             if term in filetext:
