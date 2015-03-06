@@ -1,0 +1,664 @@
+Jubilee Field
+Jubilee Field
+Jubilee Field
+Jubilee Field
+Jubilee Field
+Jubilee Field
+Jubilee Field
+Jubilee Field
+Jubilee Field
+Jubilee Field
+Jubilee Field
+Rokan
+East Kalimantan
+Makassar Strait
+Siak
+MFK
+Mahakam
+Mahakam
+South Natuna Sea B
+Corridor
+South Jambi B
+Indonesia (Nation-wide)
+Sanga-Sanga
+North Sumatra Offshore
+B Block
+Cepu
+Pase
+South East Sumatera
+Coastal Plains Pekanbaru
+West Madura
+West Madura
+Tuban
+Tuban
+Ogan Komering
+Ogan Komering
+Kepala Burung
+Kepala Burung
+Senoro - Toili, Sulawesi
+Senoro - Toili, Sulawesi
+Raja
+Raja
+Jabung
+Salawati Basin
+Bangko
+Offshore Northwest Java
+Berau
+Muturi
+Wiriagar
+Barisan Rimau
+South & Central Sumatra
+Tarakan
+Lematang
+Natuna Sea - A
+Malacca Strait
+Kangean
+Korinci
+Brantas
+Kakap
+Pangkah, East Java
+Sampang, East Java Sea
+Madura Offshore
+Sengkang, South Sulawesi
+Seram Non Bula
+Bula - Seram
+Tungkal
+Selat Panjang
+Wailawi
+Gebang
+Rokan
+East Kalimantan
+East Kalimantan
+Makassar Strait
+Makassar Strait
+Siak
+MFK
+MFK
+Mahakam
+Mahakam
+Mahakam
+South Natuna Sea B
+South Natuna Sea B
+South Natuna Sea B
+Corridor
+Corridor
+Corridor
+South Jambi B
+South Jambi B
+South Jambi B
+South Jambi B
+Indonesia (Nation-wide)
+Indonesia (Nation-wide)
+Sanga-Sanga
+Sanga-Sanga
+Sanga-Sanga
+Sanga-Sanga
+Sanga-Sanga
+Sanga-Sanga
+North Sumatra Offshore
+North Sumatra Offshore
+B Block
+B Block
+Cepu
+Cepu
+Cepu
+Cepu
+Cepu
+Cepu
+Cepu
+South East Sumatera
+South East Sumatera
+South East Sumatera
+South East Sumatera
+South East Sumatera
+South East Sumatera
+South East Sumatera
+South East Sumatera
+Muturi
+Muturi
+Muturi
+Coastal Plains Pekanbaru
+Coastal Plains Pekanbaru
+Offshore Northwest Java
+Offshore Northwest Java
+Offshore Northwest Java
+Offshore Northwest Java
+Offshore Northwest Java
+Offshore Northwest Java
+West Madura
+West Madura
+Tuban
+Tuban
+Tuban
+Salawati Island JOB
+Salawati Island JOB
+Salawati Island JOB
+Salawati Island JOB
+Senoro - Toili, Sulawesi
+Senoro - Toili, Sulawesi
+Pendopo-Raja JOB
+Pendopo-Raja JOB
+Jabung
+Jabung
+Jabung
+Jabung
+Salawati Basin
+Salawati Basin
+Salawati Basin
+Salawati Basin
+Salawati Basin
+Salawati Basin
+Bangko
+Berau
+Berau
+Berau
+Berau
+Wiriagar
+Wiriagar
+Wiriagar
+Rimau
+Rimau
+South & Central Sumatra
+South & Central Sumatra
+Tarakan
+Tarakan
+Lematang
+Lematang
+Lematang
+Block A
+Block A
+Block A
+Natuna Sea Block A
+Natuna Sea Block A
+Natuna Sea Block A
+Natuna Sea Block A
+Malacca Strait
+Malacca Strait
+Malacca Strait
+Malacca Strait
+Kangean
+Kangean
+Korinci
+Brantas
+Brantas
+Brantas
+Bentu
+Tonga
+Tonga
+Tonga
+Kakap
+Kakap
+Kakap
+Kakap
+Kakap
+Kakap
+Kakap
+Kakap
+Ogan Komering
+Ogan Komering
+Ogan Komering
+Pangkah
+Pangkah
+Pangkah
+Sampang
+Sampang
+Sampang
+Madura
+Madura
+Madura
+Sengkang
+Seram Non Bula
+Seram Non Bula
+Seram Non Bula
+Seram Non Bula
+Bula
+Tungkal
+Tungkal
+Selat Panjang
+Selat Panjang
+Selat Panjang
+Wailawi
+Gebang
+Gebang
+Gebang
+Langgak
+Langgak
+Merangin II
+Merangin II
+Merangin II
+Bawean
+Bawean
+Pase
+Jambi Merang Block, Ons. Jambi
+Jambi Merang Block, Ons. Jambi
+Jambi Merang Block, Ons. Jambi
+Jambi Merang Block, Ons. Jambi
+West Madura, Off. East Java
+West Madura, Off. East Java
+West Madura, Off. East Java
+Tengah Block, Off. East Kal.
+Tengah Block, Off. East Kal.
+Tengah Block, Off. East Kal.
+Tengah Block, Off. East Kal.
+Tengah Block, Off. East Kal.
+West Kampar Block
+Rokan
+East Kalimantan
+East Kalimantan
+Makassar Strait
+Makassar Strait
+Makassar Strait
+Siak
+MFK
+MFK
+Mahakam
+Mahakam
+South Natuna Sea B
+South Natuna Sea B
+South Natuna Sea B
+South Natuna Sea B
+Corridor
+Corridor
+Corridor
+South Jambi B
+South Jambi B
+South Jambi B
+South Jambi B
+Indonesia (Nation-wide)
+Indonesia (Nation-wide)
+Sanga-Sanga
+Sanga-Sanga
+Sanga-Sanga
+Sanga-Sanga
+Sanga-Sanga
+Sanga-Sanga
+North Sumatra Offshore
+North Sumatra Offshore
+B Block
+B Block
+Cepu
+Cepu
+Cepu
+Cepu
+Cepu
+Cepu
+Cepu
+South East Sumatera
+South East Sumatera
+South East Sumatera
+South East Sumatera
+South East Sumatera
+South East Sumatera
+South East Sumatera
+South East Sumatera
+Muturi
+Muturi
+Muturi
+Coastal Plains Pekanbaru
+Coastal Plains Pekanbaru
+Offshore Northwest Java
+Offshore Northwest Java
+Offshore Northwest Java
+Offshore Northwest Java
+Offshore Northwest Java
+Offshore Northwest Java
+Offshore Northwest Java
+West Madura
+West Madura
+Tuban
+Tuban
+Tuban
+Salawati Island JOB
+Salawati Island JOB
+Salawati Island JOB
+Salawati Island JOB
+Salawati Island JOB
+Senoro - Toili, Sulawesi
+Senoro - Toili, Sulawesi
+Senoro - Toili, Sulawesi
+Pendopo-Raja JOB
+Pendopo-Raja JOB
+Jabung
+Jabung
+Jabung
+Jabung
+Salawati Basin
+Salawati Basin
+Salawati Basin
+Salawati Basin
+Salawati Basin
+Bangko
+Bangko
+Berau
+Berau
+Berau
+Berau
+Wiriagar
+Wiriagar
+Wiriagar
+Rimau
+Rimau
+South & Central Sumatra
+South & Central Sumatra
+Tarakan
+Tarakan
+Lematang
+Lematang
+Lematang
+Block A
+Block A
+Block A
+Natuna Sea Block A
+Natuna Sea Block A
+Natuna Sea Block A
+Natuna Sea Block A
+Malacca Strait
+Malacca Strait
+Malacca Strait
+Malacca Strait
+Kangean
+Kangean
+Korinci
+Brantas
+Brantas
+Brantas
+Bentu
+Tonga
+Tonga
+Kakap
+Kakap
+Kakap
+Kakap
+Kakap
+Kakap
+Kakap
+Kakap
+Ogan Komering
+Ogan Komering
+Ogan Komering
+Pangkah
+Pangkah
+Pangkah
+Sampang
+Sampang
+Sampang
+Madura
+Madura
+Madura
+Sengkang
+Seram Non Bula
+Seram Non Bula
+Seram Non Bula
+Seram Non Bula
+Bula
+Tungkal
+Tungkal
+Selat Panjang
+Selat Panjang
+Selat Panjang
+Wailawi
+Gebang
+Gebang
+Gebang
+Langgak
+Langgak
+Merangin II
+Merangin II
+Merangin II
+Bawean
+Bawean
+Pase
+Pase
+Jambi Merang Block, Ons. Jambi
+Jambi Merang Block, Ons. Jambi
+Jambi Merang Block, Ons. Jambi
+Jambi Merang Block, Ons. Jambi
+West Madura, Off. East Java
+West Madura, Off. East Java
+West Madura, Off. East Java
+Tengah Block, Off. East Kal.
+Tengah Block, Off. East Kal.
+Tengah Block, Off. East Kal.
+Tengah Block, Off. East Kal.
+Tengah Block, Off. East Kal.
+West Kampar Block
+Pande-Temane gas project
+Pande-Temane gas project
+Pande-Temane gas project
+Pande-Temane gas project
+Pande-Temane gas project
+Pande-Temane gas project
+Pande-Temane gas project
+Pande-Temane gas project
+Pande-Temane gas project
+Pande-Temane gas project
+JPDA 03-12
+JPDA 03-12
+JPDA 03-12
+JPDA 03-12
+JPDA 03-12
+JPDA 03-13
+JPDA 03-13
+JPDA 03-13
+JPDA 03-19
+JPDA 03-19
+JPDA 03-19
+JPDA 03-19
+JPDA 03-20
+JPDA 03-20
+JPDA 03-20
+JPDA 03-20
+JPDA 06-101 A
+JPDA 06-102
+JPDA 06-102
+JPDA 06-102
+JPDA 06-102
+JPDA 06-103
+JPDA 06-103
+JPDA 06-103
+JPDA 06-103
+JPDA 06-103
+JPDA 06-103
+JPDA 06-105
+JPDA 06-105
+JPDA 06-105
+S-06-01 (Block A)
+S-06-01 (Block A)
+S-06-01 (Block A)
+S-06-01 (Block A)
+S-06-02 (Block B)
+S-06-02 (Block B)
+S-06-02 (Block B)
+S-06-02 (Block B)
+S-06-03 (Block C)
+S-06-03 (Block C)
+S-06-03 (Block C)
+S-06-03 (Block C)
+S-06-04 (Block E)
+S-06-04 (Block E)
+S-06-04 (Block E)
+S-06-04 (Block E)
+S-06-05 (Block H)
+S-06-05 (Block H)
+S-06-05 (Block H)
+S-06-05 (Block H)
+S-06-06 (Block K)
+S-06-06 (Block K)
+S-06-06 (Block K)
+JPDA 03-12
+JPDA 03-12
+JPDA 03-12
+JPDA 03-12
+JPDA 03-12
+JPDA 03-13
+JPDA 03-13
+JPDA 03-13
+JPDA 03-19
+JPDA 03-19
+JPDA 03-19
+JPDA 03-19
+JPDA 03-20
+JPDA 03-20
+JPDA 03-20
+JPDA 03-20
+JPDA 06-101 A
+JPDA 06-102
+JPDA 06-102
+JPDA 06-102
+JPDA 06-102
+JPDA 06-103
+JPDA 06-103
+JPDA 06-103
+JPDA 06-103
+JPDA 06-103
+JPDA 06-103
+JPDA 06-105
+JPDA 06-105
+JPDA 06-105
+S-06-01 (Block A)
+S-06-01 (Block A)
+S-06-01 (Block A)
+S-06-01 (Block A)
+S-06-02 (Block B)
+S-06-02 (Block B)
+S-06-02 (Block B)
+S-06-02 (Block B)
+S-06-03 (Block C)
+S-06-03 (Block C)
+S-06-03 (Block C)
+S-06-03 (Block C)
+S-06-04 (Block E)
+S-06-04 (Block E)
+S-06-04 (Block E)
+S-06-04 (Block E)
+S-06-05 (Block H)
+S-06-05 (Block H)
+S-06-05 (Block H)
+S-06-05 (Block H)
+S-06-06 (Block K)
+S-06-06 (Block K)
+S-06-06 (Block K)
+Balata East Shallow Horizons (Petrotrin F)
+Central Block
+Central Block
+Columbus Basin
+Columbus Basin Shallow (Teak, Samaan, Poui)
+Columbus Basin Shallow (Teak, Samaan, Poui)
+Columbus Basin Shallow (Teak, Samaan, Poui)
+Cory Moruga Block
+Cory Moruga Block
+Cory Moruga Block
+Cruse Horizons (Petrotrin A)
+East Brighton Area, Offshore
+East Brighton Area, Offshore
+East Brighton Area, Offshore
+Fyzabad Block
+Galeota Area
+Galeota Area
+Guapo Bay/Brighton Marine Block Trinidad, Offshore (Block B)
+Guapo Bay/Brighton Marine Block Trinidad, Offshore (Block B)
+Guapo-Oropouche-Brighton Horizons (Petrotrin D)
+Herrera Horizons (Petrotrin C)
+Icacos
+Mayaro-Guayaguayare Block
+Mayaro-Guayaguayare Block
+"Mayaro-Guayaguayare Horizons (Petrotrin B)"
+Mora Field (Block 44/57)
+Moruga North
+Moruga West
+Moruga West
+Palo Seco Block
+Parrylands
+Parrylands
+Pt. Ligoure Block
+Pt. Ligoure Block
+Southeast Coast Consortium (SECC) Blocks 1, 2, 3
+Southeast Coast Consortium (SECC) Blocks 1, 2, 3
+Southeast Coast Consortium (SECC) Blocks 1, 2, 3
+Southeast Coast Consortium (SECC) Pelican Field
+Southeast Coast Consortium (SECC) Pelican Field
+Southwest Peninsula Block- Erin Bay
+Southwest Peninsula Block- Erin Bay
+Southwest Peninsula Block- Islote Bay
+Southwest Peninsula Block- Islote Bay
+Southwest Peninsula Block- Onshore
+Southwest Peninsula Block- Onshore
+Southwest Peninsula Onshore Trinidad
+Tabaquite (Petrotrin E)
+Block 1(a)
+Block 1(a)
+Block 1(b)
+Block 1(b)
+Block 2(ab)
+Block 2(ab)
+Block 2(ab)
+Block 2(ab)
+Block 2(c)
+Block 2(c)
+Block 2(c)
+Block 3(a)
+Block 3(a)
+Block 3(a)
+Block 3(a)
+Block 3(a)
+Block 3(b)
+Block 3(b)
+Block 3(b)
+Block 3(b)
+Block 4(a)
+Block 4(b)
+Block 5(a), Offshore
+Block 5(a), Offshore
+Block 5(b), Offshore
+Block 5(b), Offshore
+Block 5(c), Offshore
+Block 5(c), Offshore
+Block 6 (East Coast, Trinidad)
+Block 6 (East Coast, Trinidad)
+Block 22
+Block 22
+Block E
+Block E
+Block Modified U(a)
+Block Modified U(a)
+Block Modified U(b)
+Block Modified U(b)
+Central Range Block- Deep Horizons
+Central Range Block- Deep Horizons
+Central Range Block- Deep Horizons
+Central Range Block- Deep Horizons
+Central Range Block-Shallow Horizons
+Central Range Block-Shallow Horizons
+Central Range Block-Shallow Horizons
+Central Range Block-Shallow Horizons
+Guayaguayare Block- Deep Horizons
+Guayaguayare Block- Deep Horizons
+Guayaguayare Block- Deep Horizons
+Guayaguayare Block-Shallow Horizons
+Guayaguayare Block-Shallow Horizons
+Guayaguayare Block-Shallow Horizons
+North Coast Marine Area 1 (NCMA 1)
+North Coast Marine Area 1 (NCMA 1)
+North Coast Marine Area 1 (NCMA 1)
+North Coast Marine Area 2 (NCMA 2)
+North Coast Marine Area 2 (NCMA 2)
+North Coast Marine Area 2 (NCMA 2)
+North Coast Marine Area 3 (NCMA 3)
+North Coast Marine Area 3 (NCMA 3)
+North Coast Marine Area 4 (NCMA 4)
+North Coast Marine Area 4 (NCMA 4)
+North Coast Marine Area 4 (NCMA 4)
+YLNG
+YLNG
+YLNG
+YLNG
+YLNG
+YLNG
+YLNG
+YLNG
+YLNG
+YLNG
+YLNG
+YLNG
+YLNG
+YLNG
