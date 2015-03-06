@@ -13,7 +13,7 @@ import codecs
 from collections import defaultdict
 
 from dissect import sheets
-
+from dissect.util import filename_to_s3path
 
 
 def simplify_company_name(name):
@@ -32,8 +32,8 @@ def simplify_company_name(name):
     subbed = re.escape(subbed)
     if len(subbed) < 4:
         return r'.^'
-    #if len(subbed) < 8:
-    #    return r'\b%s\b' % subbed
+    if len(subbed) < 8:
+        return r'\b%s\b' % subbed
     return subbed
 
 def get_search_sheet():
@@ -91,7 +91,8 @@ def reconcile_matches(fn, clear = True):
     matches = defaultdict(list)
     for line in codecs.open(fn):
         js = json.loads(line)
-        url = js['filepath'].replace('/data/sedar', 'https://sedar.openoil.net.s3.amazonaws.com')
+        url = filename_to_s3path(js['filepath'])
+        #url = js['filepath'].replace('/data/sedar', 'https://sedar.openoil.net.s3.amazonaws.com')
         for positive, details in js['positives'].items():
             positive = re.escape(positive) # re-escape
             lineno = line_numbers.get(positive, None)
@@ -110,6 +111,7 @@ def reconcile_matches(fn, clear = True):
             match_counts[lineno-2].value = len(matches[lineno])
     sheet.update_cells(output_values)
     sheet.update_cells(match_counts)
+    
 
 
 if __name__ == '__main__':

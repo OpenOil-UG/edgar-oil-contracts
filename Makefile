@@ -136,10 +136,16 @@ reduce_sedar:
 reduce_results:
 	less $(SCORE_FILE) | jq --raw-output '"\(.score),\(.filepath)"' | sort -rn | head -n 1000 |cut -d, -f 2 | python edgar_link.py > $(RESULT_CSV_FILE)
 
-namesearch:
+namesearch_old:
 	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_REGEXFILE) generate_searchterms
 	find $(SEDAR_DL_DIR) -type f | python dissect/wordsearcher.py --searchterm-file=$(WORDSEARCH_REGEXFILE) -r local --jobconf mapred.map.tasks=10 | tee $(WORDSEARCH_RESULTFILE)
 	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_RESULTFILE) reconcile_results
+
+namesearch:
+	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_REGEXFILE) generate_searchterms
+	find /data/oil/edgar_filings_text -type f | python dissect/wordsearcher.py --searchterm-file=$(WORDSEARCH_REGEXFILE) -r local --jobconf mapred.map.tasks=10 | tee $(WORDSEARCH_RESULTFILE)
+	python dissect/sheetnamesearch.py --filename $(WORDSEARCH_RESULTFILE) reconcile_results
+
 
 text_extract:
 	python dissect/util/edgar_text_extract.py --filingdir $(FILING_DOWNLOAD_DIR) --outdir $(EXTRACTED_TEXT_DIR)

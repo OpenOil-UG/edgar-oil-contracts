@@ -17,7 +17,7 @@ def walkdir(filingdir, outdir, skip_existing=True):
             dirpath_out = dirpath.replace(filingdir, outdir)
             if not os.path.exists(dirpath_out):
                 os.makedirs(dirpath_out)
-            filepath_out_base = dirpath_out + filename + '_extracted_%s.txt'
+            filepath_out_base = dirpath_out + '/' + filename + '_extracted_%s.txt'
             with open(filepath_in) as fin:
                 doc = html.fromstring(fin.read(), parser=parser)                
                 if skip_existing and os.path.exists(filepath_out_base % 1):
