@@ -166,6 +166,10 @@ project_details_oil:
 	cat /tmp/edgar_filings_containing_project_oil.txt | python dissect/projectsearch.py -r local --jobconf mapred.map.tasks=10 | tee /tmp/project_oil_details.csv
 
 
+grep_assignment_preliminary:
+	LC_ALL=C grep -E -i -r -o --file assignment_search_terms.txt /data/oil/edgar_filings_text /data/mining/edgar_filings_text /data/_pdftext_cache | tee /tmp/eiti_project_matches.txt
+
+
 #####
 #
 #  LEGACY CODE SECTION
