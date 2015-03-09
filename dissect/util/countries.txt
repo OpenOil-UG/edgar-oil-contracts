@@ -161,7 +161,7 @@ Malaysia
 Mozambique
 Namibia
 New Caledonia
-Niger
+Niger\b
 Norfolk Island
 Nigeria
 Nicaragua
