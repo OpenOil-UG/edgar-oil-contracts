@@ -1,0 +1,413 @@
+Rokan	
+East Kalimantan	
+Makassar Strait	
+Siak	 
+MFK	 
+Mahakam	 
+Mahakam	 
+South Natuna Sea B	
+Corridor     
+South Jambi B	
+Indonesia (Nation-wide)	
+Sanga-Sanga		
+North Sumatra Offshore	
+B Block	      
+Cepu	      
+Pase	      
+South East Sumatera	
+Coastal Plains Pekanbaru	
+West Madura    
+West Madura    
+Tuban	       
+Tuban	       
+Ogan Komering  
+Ogan Komering  
+Kepala Burung  
+Kepala Burung  
+Senoro - Toili, Sulawesi	
+Senoro - Toili, Sulawesi	
+Raja   
+Raja   
+Jabung 
+Salawati Basin	
+Bangko	 
+Offshore Northwest Java	
+Berau	 
+Muturi	 
+Wiriagar 
+Barisan Rimau	
+South & Central Sumatra	
+Tarakan	
+Lematang	
+Natuna Sea - A	
+Malacca Strait	
+Kangean	
+Korinci	
+Brantas	
+Kakap	
+Pangkah, East Java	
+Sampang, East Java Sea	
+Madura Offshore	   
+Sengkang, South Sulawesi	
+Seram Non Bula	
+Bula - Seram	
+Tungkal		
+Selat Panjang	
+Wailawi		
+Gebang		
+Rokan		
+East Kalimantan	
+East Kalimantan	
+Makassar Strait	
+Makassar Strait	
+Siak	 
+MFK	 
+MFK	 
+Mahakam	 
+Mahakam	 
+Mahakam	 
+South Natuna Sea B	
+South Natuna Sea B	
+South Natuna Sea B	
+Corridor     
+Corridor     
+Corridor     
+South Jambi B	
+South Jambi B	
+South Jambi B	
+South Jambi B	
+Indonesia (Nation-wide)	
+Indonesia (Nation-wide)	
+Sanga-Sanga		
+Sanga-Sanga		
+Sanga-Sanga		
+Sanga-Sanga		
+Sanga-Sanga		
+Sanga-Sanga		
+North Sumatra Offshore	
+North Sumatra Offshore	
+B Block	      
+B Block	      
+Cepu	      
+Cepu	      
+Cepu	      
+Cepu	      
+Cepu	      
+Cepu	      
+Cepu	      
+South East Sumatera	
+South East Sumatera	
+South East Sumatera	
+South East Sumatera	
+South East Sumatera	
+South East Sumatera	
+South East Sumatera	
+South East Sumatera	
+Muturi	   
+Muturi	   
+Muturi	   
+Coastal Plains Pekanbaru	
+Coastal Plains Pekanbaru	
+Offshore Northwest Java		
+Offshore Northwest Java		
+Offshore Northwest Java		
+Offshore Northwest Java		
+Offshore Northwest Java		
+Offshore Northwest Java		
+West Madura	   
+West Madura	   
+Tuban		   
+Tuban		   
+Tuban		   
+Salawati Island JOB	
+Salawati Island JOB	
+Salawati Island JOB	
+Salawati Island JOB	
+Senoro - Toili, Sulawesi	
+Senoro - Toili, Sulawesi	
+Pendopo-Raja JOB		
+Pendopo-Raja JOB		
+Jabung	     
+Jabung	     
+Jabung	     
+Jabung	     
+Salawati Basin	
+Salawati Basin	
+Salawati Basin	
+Salawati Basin	
+Salawati Basin	
+Salawati Basin	
+Bangko	 
+Berau	 
+Berau	 
+Berau	 
+Berau	 
+Wiriagar 
+Wiriagar 
+Wiriagar 
+Rimau	 
+Rimau	 
+South & Central Sumatra	
+South & Central Sumatra	
+Tarakan	
+Tarakan	
+Lematang	
+Lematang	
+Lematang	
+Block A		
+Block A		
+Block A		
+Natuna Sea Block A	
+Natuna Sea Block A	
+Natuna Sea Block A	
+Natuna Sea Block A	
+Malacca Strait	 
+Malacca Strait	 
+Malacca Strait	 
+Malacca Strait	 
+Kangean	
+Kangean	
+Korinci	
+Brantas	
+Brantas	
+Brantas	
+Bentu	
+Tonga	
+Tonga	
+Tonga	
+Kakap	
+Kakap	
+Kakap	
+Kakap	
+Kakap	
+Kakap	
+Kakap	
+Kakap	
+Ogan Komering	
+Ogan Komering	
+Ogan Komering	
+Pangkah		
+Pangkah		
+Pangkah		
+Sampang		
+Sampang		
+Sampang		
+Madura		
+Madura		
+Madura		
+Sengkang	
+Seram Non Bula	
+Seram Non Bula	
+Seram Non Bula	
+Seram Non Bula	
+Bula  
+Tungkal	
+Tungkal	
+Selat Panjang	
+Selat Panjang	
+Selat Panjang	
+Wailawi		
+Gebang		
+Gebang		
+Gebang		
+Langgak		
+Langgak		
+Merangin II	
+Merangin II	
+Merangin II	
+Bawean	 
+Bawean	 
+Pase	 
+Jambi Merang Block, Ons. Jambi	
+Jambi Merang Block, Ons. Jambi	
+Jambi Merang Block, Ons. Jambi	
+Jambi Merang Block, Ons. Jambi	
+West Madura, Off. East Java	
+West Madura, Off. East Java	
+West Madura, Off. East Java	
+Tengah Block, Off. East Kal.	
+Tengah Block, Off. East Kal.	
+Tengah Block, Off. East Kal.	
+Tengah Block, Off. East Kal.	
+Tengah Block, Off. East Kal.	
+West Kampar Block  
+Rokan	    
+East Kalimantan	
+East Kalimantan	
+Makassar Strait	
+Makassar Strait	
+Makassar Strait	
+Siak	 
+MFK	 
+MFK	 
+Mahakam	 
+Mahakam	 
+South Natuna Sea B	
+South Natuna Sea B	
+South Natuna Sea B	
+South Natuna Sea B	
+Corridor     
+Corridor     
+Corridor     
+South Jambi B	
+South Jambi B	
+South Jambi B	
+South Jambi B	
+Indonesia (Nation-wide)	
+Indonesia (Nation-wide)	
+Sanga-Sanga		
+Sanga-Sanga		
+Sanga-Sanga		
+Sanga-Sanga		
+Sanga-Sanga		
+Sanga-Sanga		
+North Sumatra Offshore	
+North Sumatra Offshore	
+B Block	      
+B Block	      
+Cepu	      
+Cepu	      
+Cepu	      
+Cepu	      
+Cepu	      
+Cepu	      
+Cepu	      
+South East Sumatera	
+South East Sumatera	
+South East Sumatera	
+South East Sumatera	
+South East Sumatera	
+South East Sumatera	
+South East Sumatera	
+South East Sumatera	
+Muturi	   
+Muturi	   
+Muturi	   
+Coastal Plains Pekanbaru	
+Coastal Plains Pekanbaru	
+Offshore Northwest Java		
+Offshore Northwest Java		
+Offshore Northwest Java		
+Offshore Northwest Java		
+Offshore Northwest Java		
+Offshore Northwest Java		
+Offshore Northwest Java		
+West Madura	   
+West Madura	   
+Tuban		   
+Tuban		   
+Tuban		   
+Salawati Island JOB	
+Salawati Island JOB	
+Salawati Island JOB	
+Salawati Island JOB	
+Salawati Island JOB	
+Senoro - Toili, Sulawesi	
+Senoro - Toili, Sulawesi	
+Senoro - Toili, Sulawesi	
+Pendopo-Raja JOB		
+Pendopo-Raja JOB		
+Jabung	     
+Jabung	     
+Jabung	     
+Jabung	     
+Salawati Basin	
+Salawati Basin	
+Salawati Basin	
+Salawati Basin	
+Salawati Basin	
+Bangko	 
+Bangko	 
+Berau	 
+Berau	 
+Berau	 
+Berau	 
+Wiriagar 
+Wiriagar 
+Wiriagar 
+Rimau	 
+Rimau	 
+South & Central Sumatra	
+South & Central Sumatra	
+Tarakan	
+Tarakan	
+Lematang	
+Lematang	
+Lematang	
+Block A		
+Block A		
+Block A		
+Natuna Sea Block A	
+Natuna Sea Block A	
+Natuna Sea Block A	
+Natuna Sea Block A	
+Malacca Strait	 
+Malacca Strait	 
+Malacca Strait	 
+Malacca Strait	 
+Kangean	
+Kangean	
+Korinci	
+Brantas	
+Brantas	
+Brantas	
+Bentu	
+Tonga	
+Tonga	
+Kakap	
+Kakap	
+Kakap	
+Kakap	
+Kakap	
+Kakap	
+Kakap	
+Kakap	
+Ogan Komering	
+Ogan Komering	
+Ogan Komering	
+Pangkah		
+Pangkah		
+Pangkah		
+Sampang		
+Sampang		
+Sampang		
+Madura		
+Madura		
+Madura		
+Sengkang	
+Seram Non Bula	
+Seram Non Bula	
+Seram Non Bula	
+Seram Non Bula	
+Bula  
+Tungkal	
+Tungkal	
+Selat Panjang	
+Selat Panjang	
+Selat Panjang	
+Wailawi		
+Gebang		
+Gebang		
+Gebang		
+Langgak		
+Langgak		
+Merangin II	
+Merangin II	
+Merangin II	
+Bawean	 
+Bawean	 
+Pase	 
+Pase	 
+Jambi Merang Block, Ons. Jambi	
+Jambi Merang Block, Ons. Jambi	
+Jambi Merang Block, Ons. Jambi	
+Jambi Merang Block, Ons. Jambi	
+West Madura, Off. East Java	
+West Madura, Off. East Java	
+West Madura, Off. East Java	
+Tengah Block, Off. East Kal.	
+Tengah Block, Off. East Kal.	
+Tengah Block, Off. East Kal.	
+Tengah Block, Off. East Kal.	
+Tengah Block, Off. East Kal.	
+West Kampar Block  
