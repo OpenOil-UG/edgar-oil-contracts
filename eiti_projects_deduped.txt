@@ -32,7 +32,6 @@ Cepu
 Coastal Plains Pekanbaru
 Columbus Basin
 Columbus Basin Shallow (Teak, Samaan, Poui)
-Corridor
 Cory Moruga Block
 Cruse Horizons (Petrotrin A)
 East Brighton Area, Offshore
@@ -72,7 +71,6 @@ Malacca Strait
 Mayaro-Guayaguayare Block
 "Mayaro-Guayaguayare Horizons (Petrotrin B)"
 Merangin II
-MFK
 Mora Field (Block 44/57)
 Moruga North
 Moruga West

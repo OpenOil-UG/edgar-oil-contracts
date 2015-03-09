@@ -37,8 +37,8 @@ TRAINING_POSITIVE_DIR=/tmp/contracts_positive
 
 WATERSHED_FILE=watershed_list.txt
 WATERSHED_FILE_LICENSES=watershed_list_licenses.txt
-SCORE_FILE=computed_scores.txt
-SCORE_FILE_LICENSES=computed_scores_licenses.txt
+SCORE_FILE=/tmp/computed_scores_$(INDUSTRY).txt
+SCORE_FILE_LICENSES=/tmp/computed_scores_licenses_$(INDUSTRY).txt
 RESULT_CSV_FILE=data/license_matches.txt
 
 
@@ -113,7 +113,7 @@ build_watershed_list:
 	python dissect/diss.py build_watershed --threshold 3 --pos_dir $(TRAINING_POSITIVE_DIR) --neg_dir training/data/negative --outfile $(WATERSHED_FILE)
 
 score_by_filename:
-	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python dissect/score_filings.py | tee $(SCORE_FILE)
+	find $(EXTRACTED_TEXT_DIR) -type f | python dissect/score_filings.py -r local --jobconf mapred.map.tasks=10  | tee $(SCORE_FILE)
 
 score_licenses:
 	ls -1d $(EXTRACTED_TEXT_DIR)/*txt | python dissect/score_filings.py | tee $(SCORE_FILE_LICENSES)
@@ -132,10 +132,14 @@ reduce_sedar_old:
 reduce_sedar:
 	less $(SEDAR_SCORE_FILE) | python dissect/postprocess_json.py --include_old_reviews > $(SEDAR_RESULT_FILE)
 
+reduce_to_csv_oil:
+	cat /tmp/computed_scores_oil.txt | python dissect/postprocess_json.py | sort -rn > /tmp/assignments_oil.csv
+
+reduce_to_csv_mining:
+	cat /tmp/computed_scores_mining.txt | python dissect/postprocess_json.py | sort -rn > /tmp/assignments_mining.csv
 
 reduce_results:
-	less $(SCORE_FILE) | jq --raw-output '"\(.score),\(.filepath)"' | sort -rn | head -n 1000 |cut -d, -f 2 | python edgar_link.py > $(RESULT_CSV_FILE)
-
+	less $(SCORE_FILE) | jq --raw-output '"\(.score),\(.filepath)"' | sort -rn | head -n 5000 |cut -d, -f 2 | python dissect/edgar_link.py > $(RESULT_CSV_FILE)
 
 namesearch:
 	#python dissect/sheetnamesearch.py --filename $(WORDSEARCH_REGEXFILE) generate_searchterms
@@ -147,17 +151,19 @@ text_extract:
 	python dissect/util/edgar_text_extract.py --filingdir $(FILING_DOWNLOAD_DIR) --outdir $(EXTRACTED_TEXT_DIR)
 
 
-
 grep_for_projects:
 	# Build a list of every edgar filing that contains the word 'project' (capitalized)
-	LC=ALL fgrep -rl "Project" /data/mining/edgar_filings_text/ /data/oil/edgar_filings_text | tee /tmp/edgar_filings_containing_project.txt
+	LC_ALL=C fgrep -rl "Project" /data/mining/edgar_filings_text/ /data/oil/edgar_filings_text | tee /tmp/edgar_filings_containing_project.txt
 
 grep_for_projects_oil:
 	# Build a list of every edgar filing that contains the word 'project' (capitalized)
-	LC=ALL fgrep -rl "Project" /data/oil/edgar_filings_text | tee /tmp/edgar_filings_containing_project_oil.txt
+	LC_ALL=C fgrep -rl "Project" /data/oil/edgar_filings_text | tee /tmp/edgar_filings_containing_project_oil.txt
+
+grep_eiti_projects:
+	LC_ALL=C fgrep -r -o --file eiti_projects_deduped.txt /data/oil/edgar_filings_text | tee /tmp/eiti_project_matches.txt
 
 project_details_oil:
-	cat /tmp/edgar_filings_containing_project_oil.txt | python dissect/projectsearch.py | tee /tmp/project_oil_details.csv
+	cat /tmp/edgar_filings_containing_project_oil.txt | python dissect/projectsearch.py -r local --jobconf mapred.map.tasks=10 | tee /tmp/project_oil_details.csv
 
 
 #####

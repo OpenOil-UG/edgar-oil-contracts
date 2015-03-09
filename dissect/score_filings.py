@@ -158,7 +158,7 @@ class MRScoreFiles(MRJob):
     def mapper(self, _, filepath):
         filetext = self.text_from_file(filepath)
         score, tokens, numpositive, dictpositive = self.compute_score(filetext)
-        if True or score > self.THRESHOLD:
+        if score > self.THRESHOLD:
             output = {
                 'score': score,
                 'filepath': filepath,

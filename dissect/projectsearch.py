@@ -46,7 +46,11 @@ class MRProjectSearch(MRScoreFiles):
         return filepath.split('/')[-2]
     
     def mapper(self, _, filepath):
-        filetext = self.text_from_file(filepath)
+        try:
+            filetext = self.text_from_file(filepath)
+        except Exception:
+            logging.error('unable to open file %s' % filepath)
+            raise StopIteration
         matches = self.greptext(filetext, filepath)
         for (label, matchgroup) in matches.items():
             for term in matchgroup:

@@ -11,6 +11,9 @@ import csv
 import sys
 import functools32
 
+from edgar_link import edgar_from_filepath
+from util import filename_to_s3path
+
 import reviewed
 
 def sortedjson(pin, args):
@@ -22,7 +25,10 @@ def sortedjson(pin, args):
         yield json.dumps(j)
 
 def s3links(jline, args):
-    jline['filepath'] = jline['filepath'].replace('/data/sedar', 'https://sedar.openoil.net.s3.amazonaws.com')
+    jline['filepath'] = filename_to_s3path(jline['filepath'])
+    #jline['filepath'] = jline['filepath'].replace('/data/sedar', 'https://sedar.openoil.net.s3.amazonaws.com')
+    if 'edgar' in jline['filepath']:
+        ignored, jline['edgar_link'], jline['edgar_exhibit_number'] = edgar_from_filepath(jline['filepath'])
     return jline
 
 @functools32.lru_cache()
@@ -52,7 +58,9 @@ def run_pipe(pin, pout, args):
     if args.include_old_reviews:
         row.filters.appened(is_reviewed)
 
-    cols = ['score', 'filepath','prior_review', 'positives', 'country_names', 'extract']
+
+    #cols = ['score', 'filepath','prior_review', 'positives', 'country_names', 'extract']
+    cols = ['score', 'filepath', 'edgar_link', 'edgar_exhibit_number', 'prior_review', 'positives', 'country_names', 'extract']
 
     for filt in file_filters:
         pin = filt(pin, args)
