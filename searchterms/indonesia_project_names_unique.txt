@@ -1,80 +1,69 @@
-Bangko	 
-Barisan Rimau	
-Bawean	 
-B Block	      
-Bentu	
-Berau	 
-Block A		
-Brantas	
-Bula  
-Bula - Seram	
-Cepu	      
-Coastal Plains Pekanbaru	
-Corridor     
-East Kalimantan	
-Gebang		
-Indonesia (Nation-wide)	
-Jabung 
-Jabung	     
-Jambi Merang Block, Ons. Jambi	
-Kakap	
-Kangean	
-Kepala Burung  
-Korinci	
-Langgak		
-Lematang	
-Madura		
-Madura Offshore	   
-Mahakam	 
-Makassar Strait	
-Malacca Strait	
-Malacca Strait	 
-Merangin II	
-MFK	 
-Muturi	 
-Muturi	   
-Natuna Sea - A	
-Natuna Sea Block A	
-North Sumatra Offshore	
-Offshore Northwest Java	
-Offshore Northwest Java		
-Ogan Komering  
-Ogan Komering	
-Pangkah		
-Pangkah, East Java	
-Pase	 
-Pase	      
-Pendopo-Raja JOB		
-Raja   
-Rimau	 
-Rokan	
-Rokan	    
-Rokan		
-Salawati Basin	
-Salawati Island JOB	
-Sampang		
-Sampang, East Java Sea	
-Sanga-Sanga		
-Selat Panjang	
-Sengkang	
-Sengkang, South Sulawesi	
-Senoro - Toili, Sulawesi	
-Seram Non Bula	
-Siak	 
-South & Central Sumatra	
-South East Sumatera	
-South Jambi B	
-South Natuna Sea B	
-Tarakan	
-Tengah Block, Off. East Kal.	
-Tonga	
-Tuban	       
-Tuban		   
-Tungkal	
-Tungkal		
-Wailawi		
-West Kampar Block  
-West Madura    
-West Madura	   
-West Madura, Off. East Java	
-Wiriagar 
+Bangko
+Barisan Rimau
+Bawean
+B Block
+Bentu
+Berau
+Block A
+Brantas
+Bula
+Bula - Seram
+Cepu
+Coastal Plains Pekanbaru
+Corridor
+East Kalimantan
+Gebang
+Indonesia (Nation-wide)
+Jabung
+Jambi Merang Block, Ons. Jambi
+Kakap
+Kangean
+Kepala Burung
+Korinci
+Langgak
+Lematang
+Madura
+Madura Offshore
+Mahakam
+Makassar Strait
+Malacca Strait
+Merangin II
+MFK
+Muturi
+Natuna Sea - A
+Natuna Sea Block A
+North Sumatra Offshore
+Offshore Northwest Java
+Ogan Komering
+Pangkah
+Pangkah, East Java
+Pase
+Pendopo-Raja JOB
+Raja
+Rimau
+Rokan
+Salawati Basin
+Salawati Island JOB
+Sampang
+Sampang, East Java Sea
+Sanga-Sanga
+Selat Panjang
+Sengkang
+Sengkang, South Sulawesi
+Senoro - Toili, Sulawesi
+Seram Non Bula
+Siak
+South & Central Sumatra
+South East Sumatera
+South Jambi B
+South Natuna Sea B
+Tarakan
+Tengah Block, Off. East Kal.
+Tonga
+Tuban
+Tungkal
+Wailawi
+West Kampar Block
+West Madura
+West Madura, Off. East Java
+Wiriagar

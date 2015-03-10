@@ -31,7 +31,6 @@ class MrMatchFiles(MRScoreFiles):
           pattern = pattern.strip().lower()
           #pattern = normalize_text(pattern)
           if pattern:
-              print(pattern, normalize_text(pattern))
               if self.options.regex:
                   pattern = re.compile(pattern)
               self.search_terms.append(pattern)
