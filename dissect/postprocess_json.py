@@ -123,7 +123,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--include_old_reviews', type=bool, default=False, help='include cross-reference against previous reviews?')
     parser.add_argument('--edgar', type=bool, default=False, help='apply edgar-specific post-processing (e.g. fixing links)')
-    parser.add_argument('--eiti_concessions', type=bool, default=False, action='store_true', help='Suppress normal processing. Instead generate output for EITI concession list')    
+    parser.add_argument('--eiti_concessions', default=False, action='store_true', help='Suppress normal processing. Instead generate output for EITI concession list')    
     args = parser.parse_args()
     if args.eiti_concessions:
         run_eiti_concessions(sys.stdin, sys.stdout, args)
