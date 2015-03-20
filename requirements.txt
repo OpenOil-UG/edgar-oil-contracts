@@ -13,3 +13,4 @@ barn
 pyPdf
 yapot
 beautifulsoup4
+pycountry
