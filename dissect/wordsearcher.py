@@ -1,15 +1,12 @@
-from score_filings import MRScoreFiles, normalize_text
+from score_filings import MRScoreFiles, OOMRJob, normalize_text
 import codecs
 from collections import defaultdict
 import re
 import logging
 
-
 class MrMatchFiles(MRScoreFiles):
-    '''
-    Just
-    '''
     THRESHOLD=0
+    ignorecase = True #should searches be case-insensitive
 
 
     def configure_options(self):
@@ -23,6 +20,9 @@ class MrMatchFiles(MRScoreFiles):
 
 
     def mapper_init(self):
+        #s3 connection
+        OOMRJob.mapper_init(self)
+
         corptypes = re.compile(r'\b(limited|ltd|inc|sarl|plc)\b', re.I)
         self.search_terms = []
         ft = codecs.open(self.options.searchterm_file, 'r', 'utf-8')
@@ -31,7 +31,7 @@ class MrMatchFiles(MRScoreFiles):
           pattern = pattern.strip().lower()
           #pattern = normalize_text(pattern)
           if pattern:
-              print(pattern, normalize_text(pattern))
+              #print(pattern, normalize_text(pattern))
               if self.options.regex:
                   pattern = re.compile(pattern)
               self.search_terms.append(pattern)
@@ -61,7 +61,7 @@ class MrMatchFiles(MRScoreFiles):
 
     def mapper(self, _, filepath):
         filetext = self.text_from_file(filepath)
-        filetext = normalize_text(filetext)
+        filetext = normalize_text(filetext, self.ignorecase)
         matches = self.greptext(filetext)
         score = len(matches)
         if score > self.THRESHOLD:
