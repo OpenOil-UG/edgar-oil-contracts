@@ -1,9 +1,8 @@
-from wordsearcher import MrMatchFiles
-from score_filings import OOMRJob
+from dissect.wordsearcher import MrMatchFiles
+from dissect.score_filings import OOMRJob
 import re
 
 class ProximitySearch(MrMatchFiles):
-    pass
     flags=re.DOTALL
     ignorecase=False
 
@@ -12,14 +11,10 @@ class ProximitySearch(MrMatchFiles):
         OOMRJob.mapper_init(self)
         pattern1 = '\W[123]P\W'
         context = '.{0,200}'
-        pattern2 = '(barrel|Barrel|BARREL)'
+        pattern2 = '(barrel|Barrel|BARREL|reserve|bpd)'
         self.search_terms = []
         self.search_terms.append(re.compile(pattern1 + context + pattern2, flags=self.flags))
         self.search_terms.append(re.compile(pattern2 + context + pattern1, flags=self.flags))
-    
-    
-
-
     
 
 

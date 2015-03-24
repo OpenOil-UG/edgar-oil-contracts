@@ -16,4 +16,4 @@ beautifulsoup4
 pycountry
 archivekit
 awscli
-
+unicodecsv
