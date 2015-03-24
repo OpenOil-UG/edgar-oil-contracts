@@ -8,7 +8,10 @@ import logging
 import os
 import sha
 import functools
-import yapot
+try:
+    import yapot
+except Exception:
+    pass
 
 # store copies of our extracted pdfs
 cachedir = '/data/_pdftext_cache'

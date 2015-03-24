@@ -227,3 +227,14 @@ make_listing:
 dl_filings_test:
 	head -20 filings_by_company.txt | python dl_filings.py --outdir $(FILING_DOWNLOAD_DIR)
 
+tardumps:
+	rm /tmp/dissect_nested.tgz /tmp/dissect.tgz
+	tar -czvf /tmp/dissect_nested.tgz --exclude dissect/training dissect
+	tar -czvf /tmp/dissect.tgz --exclude=dissect/training dissect/*
+
+proximity:
+	python dissect/proximity.py --emr-job-flow-id=j-23Q7FYWE9VDOP -r emr -c /home/src/emrtest/mrjob.conf --python-archive /tmp/dissect.tgz --python-archive /tmp/dissect_nested.tgz --output-dir=s3://logs.openoil.net/emr_proximity_full /tmp/oilfilings.txt | tee /tmp/emrout_full
+
+proximity_local:
+	python dissect/proximity.py --emr-job-flow-id=j-23Q7FYWE9VDOP -r local -c /home/src/emrtest/mrjob.conf --python-archive /tmp/dissect.tgz --python-archive /tmp/dissect_nested.tgz /tmp/fewoilfilings.txt | tee /tmp/emrout
+
