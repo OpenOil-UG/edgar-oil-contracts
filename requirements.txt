@@ -1,5 +1,6 @@
 scrapekit
 lxml
+numpy
 requests
 nltk
 cssselect
@@ -9,8 +10,10 @@ gspread
 google-api-python-client
 functools32
 argcomplete
-barn
 pyPdf
 yapot
 beautifulsoup4
 pycountry
+archivekit
+awscli
+

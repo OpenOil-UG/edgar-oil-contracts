@@ -24,6 +24,17 @@ REMOVE_SPACES = re.compile(r'\s+')
 URL = 'http://www.sec.gov/Archives/edgar/data/%s/%s/%s-index.htm'
 
 
+from boto.s3.connection import S3Connection
+from boto.s3.key import Key
+from settings import access_id, secret_id
+
+
+def decompose_s3_url(url):
+    parts = url.split('/', 3)
+    bucket = parts[2]
+    key = '/' + parts[3]
+    return (bucket, key)
+
 
 def makesearchregex(fn='searches.txt'):
     scores = {}
@@ -39,7 +50,7 @@ def makesearchregex(fn='searches.txt'):
 
 
 
-def normalize_text(text):
+def normalize_text(text, lowercase=True):
     if not isinstance(text, unicode):
         text = unicode(text, errors='ignore')
     chars = []
@@ -54,7 +65,10 @@ def normalize_text(text):
             chars.append(char)
     text = u''.join(chars)
     text = REMOVE_SPACES.sub(' ', text)
-    return text.strip().lower()
+    text = text.strip()
+    if lowercase:
+        text = text.lower()
+    return text
 
 
 def get_tokens(text, stopwords):
@@ -72,8 +86,14 @@ def get_tokens(text, stopwords):
 def sterms():
     SEARCHTERM_FILE='/tmp/searchterms.txt'
 
+class OOMRJob(MRJob):
 
-class MRScoreFiles(MRJob):
+    def mapper_init(self):
+        #s3 connection
+        self.s3conn = S3Connection(access_id, secret_id)
+    
+
+class MRScoreFiles(OOMRJob):
     """
     input a list of filepaths
     output a list of filepaths which score above the threshold
@@ -96,6 +116,9 @@ class MRScoreFiles(MRJob):
     def mapper_init(self):
         self.stopwords = set(open(self.options.stopwords).read().lower().split())
         self.searches, self.scores = makesearchregex(self.options.watershed)
+
+        OOMRJob.mapper_init(self)
+
 
     def compute_score(self, doc):
         text = normalize_text(doc)
@@ -140,8 +163,6 @@ class MRScoreFiles(MRJob):
         # score = score
         return score, tokens, len(pos_terms), dict(terms)
 
-
-
     def country_names(self, text):
         text = normalize_text(text) # XXX avoid this repetition
         return {'country_names': countries_from_text(text)}
@@ -149,9 +170,19 @@ class MRScoreFiles(MRJob):
     def snippet(self, filetext):
         return {'extract' : normalize_text(filetext)[:200]}
 
+    def s3open(self, filepath):
+        bucketname, keyname = decompose_s3_url(filepath)
+        bucket = self.s3conn.get_bucket(bucketname)
+        key = Key(bucket)
+        key.key = keyname
+        as_string = key.get_contents_as_string()
+        return as_string
+
     def text_from_file(self, filepath):
         if self.options.pdf_input:
             return pdf2text(filepath)
+        elif 's3://' in filepath:
+            return self.s3open(filepath)
         else:
             return codecs.open(filepath, 'r', 'utf-8').read()
 
